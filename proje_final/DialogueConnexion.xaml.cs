@@ -99,6 +99,8 @@ namespace proje_final
                         Content = "Vous êtes maintenant connecté. "+Singleton.getInstance().adherent.Nom,
                         CloseButtonText = "OK"
                     };
+
+                    
                     alert.XamlRoot = this.XamlRoot;
 
                     await alert.ShowAsync();

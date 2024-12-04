@@ -9,11 +9,11 @@
     mc:Ignorable="d"
 
     >
-    <NavigationView x:Name="nv" SelectionChanged="NavigationView_SelectionChanged">
+    <NavigationView x:Name="nv" SelectionChanged="NavigationView_SelectionChanged" PaneDisplayMode="Top" IsSettingsVisible="False" IsBackButtonVisible="Collapsed" Background="GhostWhite" >
         <NavigationView.Header>
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                 <AppBarButton x:Name="app_bar_icon" Click="app_bar_icon_Click" Icon="Back"></AppBarButton>
-                <TextBlock Margin="50,0" x:Name="headerTextBlock" Text="Non connecté"  FontSize="18" />
+                <TextBlock Margin="50 10 0 0" x:Name="headerTextBlock" Text="Non connecté"  FontSize="18" />
 
             </StackPanel>
         </NavigationView.Header>
@@ -23,7 +23,6 @@
         </NavigationView.MenuItems>
         <NavigationView.FooterMenuItems>
             <NavigationViewItem Content="Connexion"  Icon="Account" x:Name="iConnexion"></NavigationViewItem>
-            <NavigationViewItem Content="Deconnexion" Icon="Back" x:Name="iDeconnexion"></NavigationViewItem>
         </NavigationView.FooterMenuItems>
         <Frame x:Name="mainFrame"></Frame>
     </NavigationView>

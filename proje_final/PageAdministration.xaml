@@ -13,14 +13,14 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Spacing="30">
 
             <!-- Bouton pour la gestion des adhérents -->
-            <StackPanel Width="100" HorizontalAlignment="Center">
+            <StackPanel Width="150" HorizontalAlignment="Center">
                 <Button  Click="VoirAdherents_Click">
                     <Image Source="Assets/team.png" Stretch="UniformToFill"/>
                 </Button>
                 <TextBlock Text="Adhérents" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"/>
             </StackPanel>
             <!-- Bouton pour categories -->
-            <StackPanel Width="100" HorizontalAlignment="Center">
+            <StackPanel Width="150" HorizontalAlignment="Center">
                 <Button Click="VoirCategories_Click">
                     <Image Source="Assets/options.png" Stretch="UniformToFill"/>
                 </Button>
@@ -29,7 +29,7 @@
 
             <!-- Bouton pour la gestion des activités -->
 
-            <StackPanel Width="100" HorizontalAlignment="Center">
+            <StackPanel Width="150" HorizontalAlignment="Center">
                 <Button>
                     <Image Source="Assets/racket.png" Stretch="UniformToFill"/>
                 </Button>
@@ -38,7 +38,7 @@
             </StackPanel>
             <!-- Bouton pour la gestion des séances -->
 
-            <StackPanel Width="100" HorizontalAlignment="Center">
+            <StackPanel Width="150" HorizontalAlignment="Center">
                 <Button>
                     <Image Source="Assets/training.png" Stretch="UniformToFill"/>
                 </Button>
@@ -47,7 +47,7 @@
           
 
             <!-- Bouton pour les statistiques -->
-            <StackPanel Width="100" HorizontalAlignment="Center">
+            <StackPanel Width="150" HorizontalAlignment="Center">
                 <Button>
                     <Image Source="Assets/analytics.png" Stretch="UniformToFill"/>
                 </Button>
@@ -56,7 +56,7 @@
             
 
             <!-- Bouton pour l'exportation de données -->
-            <StackPanel Width="100" HorizontalAlignment="Center">
+            <StackPanel Width="150" HorizontalAlignment="Center">
                 <Button>
                     <Image Source="Assets/csv-file.png" Stretch="UniformToFill"/>
                 </Button>

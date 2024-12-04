@@ -1,3 +1,5 @@
+using Microsoft.UI;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -34,6 +36,8 @@ namespace proje_final
         private void initTestAdmin()
         {
             Singleton.getInstance().connexionAdministrateur("Administrateur1", "mdp1234");
+            iConnexion.Content = "Se déconnecté";
+           
             nv.SelectedItem = iAccueil;
             headerTextBlock.Text = $"Bienvenue, {Singleton.getInstance().administration.Nom}";
             mainFrame.Navigate(typeof(PageAdministration));
@@ -48,35 +52,45 @@ namespace proje_final
                 case "iAccueil":
                    
                     var administration = Singleton.getInstance().administration;
+                    var adherent = Singleton.getInstance().adherent;
 
                     if (administration != null)
                     {
+                        app_bar_icon.IsEnabled = true;
                         mainFrame.Navigate(typeof(PageAdministration));
                     }
-                    else
+                    else if (adherent != null)
                     {
+                        headerTextBlock.Text = $"Bienvenue, {Singleton.getInstance().adherent.Nom}";
+                        app_bar_icon.IsEnabled = true;
                         mainFrame.Navigate(typeof(PageAdherent));
+                    } else
+                    {
+                        app_bar_icon.IsEnabled = false;
+                        mainFrame.Navigate(typeof(PageBlanche));
                     }
 
                     break;
 
                 case "iConnexion":
+
                     if (Singleton.getInstance().adherent != null || Singleton.getInstance().administration != null)
                     {
-                        nv.SelectedItem = iAccueil;
+                        iConnexion.Content = "Se connecté";
+                        Singleton.getInstance().deconnexion();
+                        mainFrame.Content = null;
+                        mainFrame.Navigate(typeof(PageBlanche));
+                        UpdateHeader();
+                        showConnexionDialog();
+                        break;
                     }
                     else
                     {
+                        iConnexion.Content = "Se déconnecté";
                         showConnexionDialog();
                     }
                     break;
-                case "iDeconnexion":
-                    Singleton.getInstance().deconnexion();
-                    mainFrame.Content = null;
-                    nv.SelectedItem = iAccueil;
-                    UpdateHeader();
-                    break;
-
+               
             }
 
         }
@@ -101,30 +115,24 @@ namespace proje_final
             var administration = Singleton.getInstance().administration;
             if (adherent != null)
             {
-                headerTextBlock.Text = $"Bienvenue, {adherent.Nom}";
+                app_bar_icon.IsEnabled = true;
+                headerTextBlock.Text = $"Bienvenue, {Singleton.getInstance().adherent.Nom}";
                 mainFrame.Navigate(typeof(PageAdherent));
-
+                iConnexion.Content = "Déconnexion";
             }
-            else
+            else if (administration != null)
             {
-                headerTextBlock.Text = "Non connecte";
-
-            }
-
-            if (administration != null)
-            {
+                app_bar_icon.IsEnabled = true;
                 headerTextBlock.Text = $"Bienvenue, {administration.Nom}";
                 mainFrame.Navigate(typeof(PageAdministration));
-            }
+                iConnexion.Content = "Déconnexion";
 
+            }
             else
             {
-                headerTextBlock.Text = "Non connecte";
-
+                headerTextBlock.Text = "Non connecté";
             }
             nv.SelectedItem = iAccueil;
-
-
 
         }
 
@@ -132,13 +140,19 @@ namespace proje_final
         {
             try {
                 var administration = Singleton.getInstance().administration;
+                var adherent = Singleton.getInstance().adherent;
 
                 if (administration != null)
                 {
+                    app_bar_icon.IsEnabled = true;
                     mainFrame.Navigate(typeof(PageAdministration));
+                } else if (adherent != null)
+                {
+                    app_bar_icon.IsEnabled = true;
+                    mainFrame.Navigate(typeof(PageAdherent));
                 } else
                 {
-                    mainFrame.Navigate(typeof(PageAdherent));
+                    mainFrame.Navigate(typeof(PageBlanche));
                 }
 
             }
