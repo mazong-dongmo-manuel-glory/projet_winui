@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="proje_final.PageAdministration"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:proje_final"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Padding="20">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Spacing="30">
+
+            <!-- Bouton pour la gestion des adhérents -->
+            <StackPanel Width="100" HorizontalAlignment="Center">
+                <Button  Click="VoirAdherents_Click">
+                    <Image Source="Assets/team.png" Stretch="UniformToFill"/>
+                </Button>
+                <TextBlock Text="Adhérents" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <!-- Bouton pour categories -->
+            <StackPanel Width="100" HorizontalAlignment="Center">
+                <Button Click="VoirCategories_Click">
+                    <Image Source="Assets/options.png" Stretch="UniformToFill"/>
+                </Button>
+                <TextBlock Text="Categories" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- Bouton pour la gestion des activités -->
+
+            <StackPanel Width="100" HorizontalAlignment="Center">
+                <Button>
+                    <Image Source="Assets/racket.png" Stretch="UniformToFill"/>
+                </Button>
+                <TextBlock Text="Activités" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"/>
+
+            </StackPanel>
+            <!-- Bouton pour la gestion des séances -->
+
+            <StackPanel Width="100" HorizontalAlignment="Center">
+                <Button>
+                    <Image Source="Assets/training.png" Stretch="UniformToFill"/>
+                </Button>
+                <TextBlock Text="Séances" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"/>
+            </StackPanel>
+          
+
+            <!-- Bouton pour les statistiques -->
+            <StackPanel Width="100" HorizontalAlignment="Center">
+                <Button>
+                    <Image Source="Assets/analytics.png" Stretch="UniformToFill"/>
+                </Button>
+                <TextBlock Text="Statistiques" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"/>
+            </StackPanel>
+            
+
+            <!-- Bouton pour l'exportation de données -->
+            <StackPanel Width="100" HorizontalAlignment="Center">
+                <Button>
+                    <Image Source="Assets/csv-file.png" Stretch="UniformToFill"/>
+                </Button>
+                <TextBlock Text="CSV" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"/>
+            </StackPanel>
+            
+
+        </StackPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,19 @@
+<ContentDialog
+    x:Class="proje_final.DialogueCategorie"
+    Title="Ajouter une Catégorie"
+    PrimaryButtonText="Ajouter"
+    SecondaryButtonText="Annuler"
+    DefaultButton="Primary"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"   
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:proje_final"
+    >
+
+    <StackPanel Spacing="12">
+        <TextBox x:Name="NomCategorie" Header="Nom de la catégorie" PlaceholderText="Entrez le nom" />
+        <TextBox x:Name="ImageLink" Header="Lien de l'image" PlaceholderText="Entrez le lien de l'image" />
+        <TextBlock x:Name="ErrorMessage" Foreground="Red" Visibility="Collapsed" Text="Veuillez remplir tous les champs." />
+    </StackPanel>
+</ContentDialog>
