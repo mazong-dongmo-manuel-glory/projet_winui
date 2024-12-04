@@ -21,8 +21,8 @@
             </StackPanel>
 
             <GridView Grid.Row="1"
-         x:Name="gridCategories"
-         ItemsSource="{Binding categories, Mode=TwoWay}">
+                      x:Name="gridCategories"
+                      ItemsSource="{Binding categories, Mode=TwoWay}">
 
                 <!-- Style personnalisé des éléments GridView -->
                 <GridView.ItemContainerStyle>
@@ -32,11 +32,11 @@
                 </GridView.ItemContainerStyle>
 
                 <!-- Définition de la mise en page des éléments (wrap) -->
-                <GridView.ItemsPanel> 
+                <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <ItemsWrapGrid x:Name="MaxItemsWrapGrid"
-                                MaximumRowsOrColumns="7"
-                                Orientation="Horizontal"/>
+                                       MaximumRowsOrColumns="7"
+                                       Orientation="Horizontal"/>
                     </ItemsPanelTemplate>
                 </GridView.ItemsPanel>
 
@@ -46,32 +46,32 @@
                         <Border BorderBrush="Gray" BorderThickness="2" Margin="10">
                             <StackPanel Width="300" Height="300" Margin="10">
                                 <!-- Affichage du nom de l'adhérent -->
-                            
-                            <TextBlock Text="{Binding Nom, Mode=TwoWay}" Margin="0,2" FontSize="16" FontWeight="Bold"/>
+
+                                <TextBlock Text="{Binding Nom, Mode=TwoWay}" Margin="0,2" FontSize="16" FontWeight="Bold"/>
                                 <StackPanel Width="100" Height="100">
                                     <Image Source="{Binding ImageLink, Mode=TwoWay}" Stretch="UniformToFill"></Image>
 
                                 </StackPanel>
-                           
-                                    <!-- Bouton avec une icône intégrée -->
-                                    <Button x:Name="btn_edit" Click="btn_edit_Click"  Tag="{Binding Id, Mode=TwoWay}" Width="50" Height="50" Margin="5">
-                                        <!-- Icône avec le texte -->
-                                        <Button.Content>
-                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                <SymbolIcon Symbol="Edit" Width="20" Height="20" Margin="0,0,5,0"/>
-                                            </StackPanel>
-                                        </Button.Content>
-                                    </Button>
-                                    <!-- Bouton avec une icône intégrée -->
-                                    <Button x:Name="btn_delete" Click="btn_delete_Click"  Tag="{Binding Id,Mode=TwoWay}" Width="50" Height="50" Margin="5">
-                                        <!-- Icône avec le texte -->
-                                        <Button.Content>
-                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                <SymbolIcon Symbol="Delete" Width="20" Height="20" Margin="0,0,5,0"/>
-                                            </StackPanel>
-                                        </Button.Content>
-                                    </Button>
-                                </StackPanel>
+
+                                <!-- Bouton avec une icône intégrée -->
+                                <Button x:Name="btn_edit" Click="btn_edit_Click"  Tag="{Binding Id, Mode=TwoWay}" Width="50" Height="50" Margin="5" Visibility="{x:Bind CanDisplay}">
+                                    <!-- Icône avec le texte -->
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <SymbolIcon Symbol="Edit" Width="20" Height="20" Margin="0,0,5,0"/>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                                <!-- Bouton avec une icône intégrée -->
+                                <Button x:Name="btn_delete" Click="btn_delete_Click"  Tag="{Binding Id,Mode=TwoWay}" Width="50" Height="50" Margin="5"  Visibility="{x:Bind CanDisplay}">
+                                    <!-- Icône avec le texte -->
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <SymbolIcon Symbol="Delete" Width="20" Height="20" Margin="0,0,5,0"/>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                            </StackPanel>
                         </Border>
                     </DataTemplate>
                 </GridView.ItemTemplate>

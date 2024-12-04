@@ -29,6 +29,8 @@ namespace proje_final
             con = new MySqlConnection("Server=cours.cegep3r.info;Database=a2024_420-345-ri_eq14;Uid=2304249;Pwd=2304249;");
         }
 
+        public Administration Admin { get { return administration; } }
+
         public static Singleton  getInstance()
         {
             if(instance == null)

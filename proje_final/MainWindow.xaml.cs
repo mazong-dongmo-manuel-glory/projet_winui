@@ -14,14 +14,10 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace proje_final
 {
-    /// <summary>
-    /// An empty window that can be used on its own or navigated to within a Frame.
-    /// </summary>
+    
     public sealed partial class MainWindow : Window
     {
         public MainWindow()
@@ -50,7 +46,20 @@ namespace proje_final
             switch (nav.Name)
             {
                 case "iAccueil":
+                   
+                    var administration = Singleton.getInstance().administration;
+
+                    if (administration != null)
+                    {
+                        mainFrame.Navigate(typeof(PageAdministration));
+                    }
+                    else
+                    {
+                        mainFrame.Navigate(typeof(PageAdherent));
+                    }
+
                     break;
+
                 case "iConnexion":
                     if (Singleton.getInstance().adherent != null || Singleton.getInstance().administration != null)
                     {
@@ -59,7 +68,6 @@ namespace proje_final
                     else
                     {
                         showConnexionDialog();
-
                     }
                     break;
                 case "iDeconnexion":
@@ -82,7 +90,7 @@ namespace proje_final
             dialog.Title = "Connexion";
             dialog.PrimaryButtonText = "Se connecter";
             dialog.CloseButtonText = "Annuler";
-            dialog.DefaultButton = ContentDialogButton.Close;
+            dialog.DefaultButton = ContentDialogButton.Primary;
             ContentDialogResult resultat = await dialog.ShowAsync();
             UpdateHeader();
     }
@@ -122,8 +130,17 @@ namespace proje_final
 
         private void app_bar_icon_Click(object sender, RoutedEventArgs e)
         {
-            try { 
-                mainFrame.GoBack();
+            try {
+                var administration = Singleton.getInstance().administration;
+
+                if (administration != null)
+                {
+                    mainFrame.Navigate(typeof(PageAdministration));
+                } else
+                {
+                    mainFrame.Navigate(typeof(PageAdherent));
+                }
+
             }
             catch (Exception ex) {
             }

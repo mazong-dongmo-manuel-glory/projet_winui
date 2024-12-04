@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.UI.Xaml;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -21,6 +22,8 @@ namespace proje_final
             this.imageLink = imageLink;
             this.id = id;
         }
+
+        public Visibility CanDisplay { get { return Singleton.getInstance().Admin == null ? Visibility.Collapsed : Visibility.Visible; } }
 
         public event PropertyChangedEventHandler PropertyChanged;
         

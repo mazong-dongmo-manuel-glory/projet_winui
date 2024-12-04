@@ -9,7 +9,28 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid Padding="20">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Spacing="30">
 
+
+            <!-- Bouton pour la gestion des activités -->
+
+            <StackPanel Width="200" HorizontalAlignment="Center">
+                <Button x:Name="btn_activites" Click="btn_activites_Click">
+                    <Image Source="Assets/racket.png" Stretch="UniformToFill"/>
+                </Button>
+                <TextBlock Text="Activités" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"/>
+
+            </StackPanel>
+            <!-- Bouton pour la gestion des séances -->
+
+            <StackPanel Width="200" HorizontalAlignment="Center">
+                <Button x:Name="btn_seances" Click="btn_seances_Click">
+                    <Image Source="Assets/training.png" Stretch="UniformToFill"/>
+                </Button>
+                <TextBlock Text="Séances" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"/>
+            </StackPanel>
+
+        </StackPanel>
     </Grid>
 </Page>
