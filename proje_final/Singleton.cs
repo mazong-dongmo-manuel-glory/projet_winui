@@ -52,37 +52,33 @@ namespace proje_final
 
         public void getActivites()
         {
+            openCon();
             try
             {
-                openCon();
-                using (MySqlCommand cmd = con.CreateCommand())
+                MySqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "SELECT * FROM ActivitesCategories";
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
                 {
-                    cmd.CommandText = "SELECT * FROM Activites ";
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            var newActivite = new Activites(
-                                reader.GetInt32("id"),
-                                reader.GetString("nom"),
-                                reader.GetInt32("categorie_id"),
-                                reader.GetInt32("prixCout"),
-                                reader.GetInt32("prixVente")
-                            );
-                            activiteListe.Add(newActivite);
-                            Debug.WriteLine(newActivite.Nom);
-                        }
-                    }
+
+                    var newActivite = new Activites(
+                        reader.GetInt32("id"),
+                        reader.GetString("nom"),
+                        reader.GetInt32("categorie_id"),
+                        reader.GetInt32("prixCout"),
+                        reader.GetInt32("prixVente"),
+                        reader.GetString("imageLink")
+                        );
+                    activiteListe.Add(newActivite);
                 }
-            }
-            catch (Exception ex)
+                reader.Close();
+
+               
+            }catch(Exception e)
             {
-                Debug.WriteLine("Erreur lors de la récupération des activités : " + ex.Message);
+                Debug.WriteLine(e.Message);
             }
-            finally
-            {
-                con.Close();
-            }
+            con.Close();
         }
         public void getAdherents()
         {

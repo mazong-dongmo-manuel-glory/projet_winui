@@ -47,6 +47,9 @@
                         <Border BorderBrush="Gray" BorderThickness="2" Margin="10">
                             <StackPanel Width="300" Height="300" Margin="10">
                                 <!-- Affichage du nom de l'adhérent -->
+                                <StackPanel Width="100" Height="100">
+                                    <Image Source="{Binding ImageLink}" Stretch="UniformToFill"></Image>
+                                </StackPanel>
                                 <TextBlock Text="{Binding Nom, Mode=TwoWay}" Margin="0,2" FontSize="16" FontWeight="Bold"/>
                                 <TextBlock Text="{Binding PrixCout, Mode=OneWay}" Margin="0,2" FontSize="16" FontWeight="Bold"/>
                                 <TextBlock Text="{Binding PrixVente, Mode=TwoWay}" Margin="0,2" FontSize="16" FontWeight="Bold"/>
