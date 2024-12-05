@@ -20,6 +20,7 @@ namespace proje_final
         public Administration administration;
         public ObservableCollection<Adherent> adherentListe = new ObservableCollection<Adherent>();
         public ObservableCollection<Categorie> categorieListe = new ObservableCollection<Categorie>();
+        public ObservableCollection<Activites> activiteListe = new ObservableCollection<Activites>();
         public static MainWindow mainWindow;
         public static Frame mainFrame;
         MySqlConnection con;
@@ -48,6 +49,41 @@ namespace proje_final
             }
         }
         /* Recuperation des tables */
+
+        public void getActivites()
+        {
+            try
+            {
+                openCon();
+                using (MySqlCommand cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT * FROM Activites ";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var newActivite = new Activites(
+                                reader.GetInt32("id"),
+                                reader.GetString("nom"),
+                                reader.GetInt32("categorie_id"),
+                                reader.GetInt32("prixCout"),
+                                reader.GetInt32("prixVente")
+                            );
+                            activiteListe.Add(newActivite);
+                            Debug.WriteLine(newActivite.Nom);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Erreur lors de la récupération des activités : " + ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
         public void getAdherents()
         {
             try

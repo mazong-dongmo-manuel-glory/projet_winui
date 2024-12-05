@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -23,9 +24,34 @@ namespace proje_final
     /// </summary>
     public sealed partial class PageGestionActivite : Page
     {
+        ObservableCollection<Activites> activites;
         public PageGestionActivite()
         {
             this.InitializeComponent();
+            Singleton.getInstance().getActivites();
+            activites = Singleton.getInstance().activiteListe;
+            gridActivites.ItemsSource = activites;
+        }
+        private async void btn_edit_Click(object sender, RoutedEventArgs e)
+        {
+            var btn = sender as Button;
+            var numero = btn.Tag.ToString();
+            DialogueEditAdherent dialogueEditAdherent = new DialogueEditAdherent(numero);
+            dialogueEditAdherent.XamlRoot = this.XamlRoot;
+            await dialogueEditAdherent.ShowAsync();
+        }
+        private void btn_delete_Click(object sender, RoutedEventArgs e)
+        {
+            var btn = sender as Button;
+            Singleton.getInstance().deleteAdherent(btn.Tag.ToString());
+
+        }
+
+        private async void app_bar_icon_add_Click(object sender, RoutedEventArgs e)
+        {
+            DialogueAjouteAdherent ajouteAdherent = new DialogueAjouteAdherent();
+            ajouteAdherent.XamlRoot = this.XamlRoot;
+            await ajouteAdherent.ShowAsync();
         }
     }
 }

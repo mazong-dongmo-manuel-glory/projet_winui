@@ -30,7 +30,7 @@
             <!-- Bouton pour la gestion des activités -->
 
             <StackPanel Width="150" HorizontalAlignment="Center">
-                <Button>
+                <Button Click="VoirActivites_click">
                     <Image Source="Assets/racket.png" Stretch="UniformToFill"/>
                 </Button>
                 <TextBlock Text="Activités" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"/>

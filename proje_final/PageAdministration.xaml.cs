@@ -34,7 +34,11 @@ namespace proje_final
         private void VoirCategories_Click(object sender, RoutedEventArgs e)
         {
             Singleton.mainFrame.Navigate(typeof(PageGestionCategorie));
-        }   
+        } 
+        private void VoirActivites_click(object sender, RoutedEventArgs e)
+        {
+            Singleton.mainFrame.Navigate(typeof(PageGestionActivite));
+        }
 
 
     }
