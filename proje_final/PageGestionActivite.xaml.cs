@@ -35,10 +35,10 @@ namespace proje_final
         private async void btn_edit_Click(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
-            var numero = btn.Tag.ToString();
-            DialogueEditAdherent dialogueEditAdherent = new DialogueEditAdherent(numero);
-            dialogueEditAdherent.XamlRoot = this.XamlRoot;
-            await dialogueEditAdherent.ShowAsync();
+            var numero = int.Parse(btn.Tag.ToString());
+            DialogueEditActivite dialogEditActivite = new DialogueEditActivite(numero);
+            dialogEditActivite.XamlRoot = this.XamlRoot;
+            await dialogEditActivite.ShowAsync();
         }
         private void btn_delete_Click(object sender, RoutedEventArgs e)
         {
@@ -49,9 +49,9 @@ namespace proje_final
 
         private async void app_bar_icon_add_Click(object sender, RoutedEventArgs e)
         {
-            DialogueAjouteAdherent ajouteAdherent = new DialogueAjouteAdherent();
-            ajouteAdherent.XamlRoot = this.XamlRoot;
-            await ajouteAdherent.ShowAsync();
+            DialogAjoutActivite dialogAjouteActivite = new DialogAjoutActivite();
+            dialogAjouteActivite.XamlRoot = this.XamlRoot;
+            await dialogAjouteActivite.ShowAsync();
         }
     }
 }

@@ -49,7 +49,18 @@ namespace proje_final
             }
         }
         /* Recuperation des tables */
-
+        public Activites getActivite(int id)
+        {
+            Activites act = new Activites(0,"",0,0,0,"","");
+            foreach(var activite in activiteListe)
+            {
+                if(activite.id == id)
+                {
+                    act = activite;
+                }
+            }
+            return act;
+        }
         public void getActivites()
         {
             openCon();

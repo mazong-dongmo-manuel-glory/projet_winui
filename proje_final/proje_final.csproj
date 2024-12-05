@@ -13,10 +13,12 @@
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="DialogAjoutActivite.xaml" />
     <None Remove="DialogEditCategorie.xaml" />
     <None Remove="DialogueAjouteAdherent.xaml" />
     <None Remove="DialogueCategorie.xaml" />
     <None Remove="DialogueConnexion.xaml" />
+    <None Remove="DialogueEditActivite.xaml" />
     <None Remove="DialogueEditAdherent.xaml" />
     <None Remove="PageAdherent.xaml" />
     <None Remove="PageAdministration.xaml" />
@@ -51,6 +53,16 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="DialogueEditActivite.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="DialogAjoutActivite.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="PageBlanche.xaml">
