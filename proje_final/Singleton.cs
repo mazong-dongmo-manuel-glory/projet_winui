@@ -258,6 +258,8 @@ namespace proje_final
                 cmd.Parameters.AddWithValue("id", cat.Id.ToString());
                 cmd.ExecuteNonQuery();
                 con.Close();
+                Debug.WriteLine("Debogage "+cat.Id);
+
                 return true;
             }
             catch (Exception e)

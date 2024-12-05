@@ -11,10 +11,10 @@ namespace proje_final
     internal class Categorie : INotifyPropertyChanged
     {
         public string nom; public string imageLink;  public  int id;
-        public string Nom { get=>nom; set { value = nom; this.OnPropertyChanged(nameof(Nom)); } }
+        public string Nom { get=>nom; set { nom=value; this.OnPropertyChanged(nameof(Nom)); } }
         
-        public string ImageLink { get => imageLink; set { value = imageLink; this.OnPropertyChanged(nameof(ImageLink)); } }
-        public int Id { get => id; set { value = id; this.OnPropertyChanged(nameof(Id)); } }
+        public string ImageLink { get => imageLink; set { imageLink = value; this.OnPropertyChanged(nameof(ImageLink)); } }
+        public int Id { get => id; set { id = value; this.OnPropertyChanged(nameof(Id)); } }
 
         public Categorie(string nom, string imageLink, int id)
         {
@@ -29,6 +29,7 @@ namespace proje_final
         
         private void OnPropertyChanged(string propertyName)
         {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
