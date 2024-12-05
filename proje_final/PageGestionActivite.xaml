@@ -53,7 +53,7 @@
                                 <TextBlock Text="{Binding Nom, Mode=TwoWay}" Margin="0,2" FontSize="16" FontWeight="Bold"/>
                                 <TextBlock Text="{Binding PrixCout, Mode=OneWay}" Margin="0,2" FontSize="16" FontWeight="Bold"/>
                                 <TextBlock Text="{Binding PrixVente, Mode=TwoWay}" Margin="0,2" FontSize="16" FontWeight="Bold"/>
-                                <TextBlock Text="{Binding CategorieId, Mode=TwoWay}" Margin="0,2" FontSize="16" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding  CategorieNom, Mode=TwoWay}" Margin="0,2" FontSize="16" FontWeight="Bold"/>
                                 <StackPanel Orientation="Horizontal">
                                     <!-- Bouton avec une icône intégrée -->
                                     <Button x:Name="btn_edit" Click="btn_edit_Click" Tag="{Binding Id, Mode=TwoWay}" Width="50" Height="50" Margin="5">

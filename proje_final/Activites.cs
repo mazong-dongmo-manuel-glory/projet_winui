@@ -16,6 +16,7 @@ namespace proje_final
         public int prixVente;
         public int id;
         public string imageLink;
+        public string categorie_nom;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -24,11 +25,12 @@ namespace proje_final
 
             } }
         public string ImageLink { get => imageLink; set { imageLink = value; OnPropertyChanged(nameof(ImageLink)); } }
-        public int CategorieIid { get => categorie_id; set { categorie_id = value; OnPropertyChanged(nameof(CategorieIid)); } }
+        public int CategorieId { get => categorie_id; set { categorie_id = value; OnPropertyChanged(nameof(CategorieId)); } }
         public int PrixCout { get => prixCout; set { prixCout = value; OnPropertyChanged(nameof(PrixCout)); } }
         public int PrixVente { get => prixVente; set { prixVente = value; OnPropertyChanged(nameof(PrixVente)); } }
         public int Id { get => id; set { id = value; OnPropertyChanged(nameof(Id)); } }
-        public Activites(int id, string  nom, int categorie_id, int prixCout, int prixVente, string imageLink)
+        public string CategorieNom { get => categorie_nom; set { categorie_nom = value; OnPropertyChanged(nameof(CategorieNom)); } }
+        public Activites(int id, string  nom, int categorie_id, int prixCout, int prixVente, string imageLink, string categorie_nom)
         {
             this.nom = nom;
             this.categorie_id = categorie_id;
@@ -36,6 +38,7 @@ namespace proje_final
             this.prixVente = prixVente;
             this.id = id;
             this.imageLink = imageLink;
+            this.categorie_nom = categorie_nom;
         }
         private void OnPropertyChanged(string propertyName)
         {

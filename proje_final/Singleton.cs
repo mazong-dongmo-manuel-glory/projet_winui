@@ -67,7 +67,8 @@ namespace proje_final
                         reader.GetInt32("categorie_id"),
                         reader.GetInt32("prixCout"),
                         reader.GetInt32("prixVente"),
-                        reader.GetString("imageLink")
+                        reader.GetString("imageLink"),
+                        reader.GetString("categorieNom")
                         );
                     activiteListe.Add(newActivite);
                 }
