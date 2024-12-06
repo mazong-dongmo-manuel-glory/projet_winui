@@ -14,14 +14,10 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace proje_final
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+
     public sealed partial class PageGestionActivite : Page
     {
         ObservableCollection<Activites> activites;
@@ -52,6 +48,18 @@ namespace proje_final
             DialogAjoutActivite dialogAjouteActivite = new DialogAjoutActivite();
             dialogAjouteActivite.XamlRoot = this.XamlRoot;
             await dialogAjouteActivite.ShowAsync();
+        }
+
+        public Visibility CanDisplay2 { get { return Singleton.getInstance().Admin == null ? Visibility.Collapsed : Visibility.Visible; } }
+        
+
+        private async void Inscription_activite_Click(object sender, RoutedEventArgs e)
+        {
+
+            DialogueInscriptionActivite dialogueInscriptionActivite = new DialogueInscriptionActivite();
+            dialogueInscriptionActivite.XamlRoot = this.XamlRoot;
+            await dialogueInscriptionActivite.ShowAsync();
+
         }
     }
 }

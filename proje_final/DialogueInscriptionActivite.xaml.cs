@@ -14,26 +14,22 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 
 
-
 namespace proje_final
 {
-   
-    public sealed partial class PageAdherent : Page
+
+    public sealed partial class DialogueInscriptionActivite : ContentDialog
     {
-        public PageAdherent()
+        public DialogueInscriptionActivite()
         {
             this.InitializeComponent();
+            dateChoisis.MinDate = DateTime.Now.AddDays(1);
+            dateChoisis.MaxDate = DateTime.Now.AddDays(365);
+            HeureChoisis.MinuteIncrement = 30;
         }
 
-       
-        private void btn_seances_Click(object sender, RoutedEventArgs e)
+        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
 
-        }
-
-        private void btn_activites_Click(object sender, RoutedEventArgs e)
-        {
-            Singleton.mainFrame.Navigate(typeof(PageGestionActivite));
         }
     }
 }

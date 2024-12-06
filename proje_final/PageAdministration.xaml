@@ -44,16 +44,16 @@
                 </Button>
                 <TextBlock Text="Séances" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"/>
             </StackPanel>
-          
+
 
             <!-- Bouton pour les statistiques -->
             <StackPanel Width="150" HorizontalAlignment="Center">
-                <Button>
+                <Button x:Name="btn_statistique" Click="btn_statistique_Click">
                     <Image Source="Assets/analytics.png" Stretch="UniformToFill"/>
                 </Button>
                 <TextBlock Text="Statistiques" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"/>
             </StackPanel>
-            
+
 
             <!-- Bouton pour l'exportation de données -->
             <StackPanel Width="150" HorizontalAlignment="Center">
@@ -62,7 +62,7 @@
                 </Button>
                 <TextBlock Text="CSV" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"/>
             </StackPanel>
-            
+
 
         </StackPanel>
     </Grid>

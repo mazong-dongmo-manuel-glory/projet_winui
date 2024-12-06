@@ -415,7 +415,31 @@ namespace proje_final
             adherent = null;
             administration = null;
         }
+
+
+        // SECTION STATISTIQUE
+
+        public int GetTotalAdherent()
+        {
+            return adherentListe.Count;
+        }
+
+        public int GetTotalActivite()
+        {
+            return activiteListe.Count;
+        }
+
+        public int GetTotalcategorie()
+        {
+            return categorieListe.Count;
+        }
+
+        public void rechercherAdherentNom(string v)
+        {
          
+        }
+
+     
        
     }
 }

@@ -13,14 +13,10 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace proje_final
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+
     public sealed partial class PageAdministration : Page
     {
         public PageAdministration()
@@ -40,6 +36,9 @@ namespace proje_final
             Singleton.mainFrame.Navigate(typeof(PageGestionActivite));
         }
 
-
+        private void btn_statistique_Click(object sender, RoutedEventArgs e)
+        {
+            Singleton.mainFrame.Navigate(typeof(PageStatistiques));
+        }
     }
 }
