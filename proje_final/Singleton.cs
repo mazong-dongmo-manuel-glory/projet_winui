@@ -21,6 +21,7 @@ namespace proje_final
         public ObservableCollection<Adherent> adherentListe = new ObservableCollection<Adherent>();
         public ObservableCollection<Categorie> categorieListe = new ObservableCollection<Categorie>();
         public ObservableCollection<Activites> activiteListe = new ObservableCollection<Activites>();
+        public ObservableCollection<Seances> seancesListe = new ObservableCollection<Seances>();
         public static MainWindow mainWindow;
         public static Frame mainFrame;
         MySqlConnection con;
@@ -49,6 +50,30 @@ namespace proje_final
             }
         }
         /* Recuperation des tables */
+        public void getSeances()
+        {
+            openCon();
+            try
+            {
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "SELECT seances.*, activites.Nom as nomActivite FROM seances INNER JOIN activites ON activites.id = seances.idActivites";
+                var reader = cmd.ExecuteReader();
+                var seance = new Seances();
+                while (reader.Read())
+                {
+                    
+                    seance.Id = reader.GetInt32("id");
+                    seance.NombrePlace = reader.GetInt32("nombrePlace");
+                    seance.NombrePlaceRestante = reader.GetInt32("nombrePlaceRestante");
+                    seance.IdActivite = reader.GetInt32("idActivite");
+
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        } 
         public Activites getActivite(int id)
         {
             Activites act = new Activites(0,"",0,0,0,"","");
