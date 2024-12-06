@@ -43,7 +43,7 @@
                 <ComboBox x:Name="cmbCategories" ItemsSource="{x:Bind categories}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate x:DataType="local:Categorie">
-                            <TextBlock Text="{x:Bind Nom}"></TextBlock>
+                            <TextBlock  Tag="{x:Bind Id}" Text="{x:Bind Nom}"></TextBlock>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>

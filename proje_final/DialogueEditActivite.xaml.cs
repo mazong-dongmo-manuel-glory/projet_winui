@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -38,8 +39,8 @@ namespace proje_final
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            int prixCout;
-            int prixVente;
+            int prixCout = 0;
+            int prixVente = 0;
             List<string> errors = new List<string>();
             try
             {
@@ -87,7 +88,13 @@ namespace proje_final
             }
             else
             {
-                
+                var cat = cmbCategories.SelectedItem as Categorie;
+                activite.Nom = txtNom.Text;
+                activite.PrixVente = prixVente;
+                activite.prixCout = prixCout;
+                activite.CategorieId = cat.Id;
+                activite.CategorieNom = cat.Nom;
+                Singleton.getInstance().updateActivite(activite);
             }
         }
     }

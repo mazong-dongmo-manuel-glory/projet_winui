@@ -22,22 +22,22 @@
                 <TextBox x:Name="txtNom" PlaceholderText="Entrez le nom" />
             </StackPanel>
 
-            <!-- Champ pour Prénom -->
+            <!-- Champ pour prixCout-->
             <StackPanel Margin="0,10,0,0">
                 <TextBlock Text="Cout organisation" Margin="0,0,0,5" FontWeight="SemiBold"/>
                 <TextBox x:Name="txtCoutOrganisation" PlaceholderText="Entrez le cout de l'organisation"/>
             </StackPanel>
 
-            <!-- Champ pour Numéro -->
-            <StackPanel Margin="0,10,0,0" Visibility="Collapsed">
+            <!-- Champ pour le prixVente -->
+            <StackPanel Margin="0,10,0,0">
                 <TextBlock Text="Prix participant" Margin="0,0,0,5" FontWeight="SemiBold"/>
                 <TextBox x:Name="txtPrixParticipant" PlaceholderText="Entrez le prix de participation"/>
             </StackPanel>
 
-            <!-- Champ pour Date de Naissance -->
+            <!-- Champ pour  la categorie-->
             <StackPanel Margin="0,10,0,0">
                 <TextBlock Text="Categorie" Margin="0,0,0,5" FontWeight="SemiBold"/>
-                <ComboBox ItemsSource="{x:Bind categories}">
+                <ComboBox x:Name="cmbCategories"  ItemsSource="{x:Bind categories}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate x:DataType="local:Categorie">
                             <TextBlock Text="{x:Bind Nom}"></TextBlock>
@@ -46,5 +46,5 @@
                 </ComboBox>
             </StackPanel>
         </StackPanel>
-    </Grid>
+        </Grid>
 </ContentDialog>

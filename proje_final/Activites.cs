@@ -22,7 +22,7 @@ namespace proje_final
 
         public string Nom { get=>nom; set { 
                nom = value;
-
+                OnPropertyChanged(nameof(Nom));
             } }
         public string ImageLink { get => imageLink; set { imageLink = value; OnPropertyChanged(nameof(ImageLink)); } }
         public int CategorieId { get => categorie_id; set { categorie_id = value; OnPropertyChanged(nameof(CategorieId)); } }

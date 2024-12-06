@@ -69,6 +69,7 @@ namespace proje_final
                 MySqlCommand cmd = con.CreateCommand();
                 cmd.CommandText = "SELECT * FROM ActivitesCategories";
                 var reader = cmd.ExecuteReader();
+                activiteListe = new ObservableCollection<Activites>();
                 while (reader.Read())
                 {
 
@@ -91,6 +92,52 @@ namespace proje_final
                 Debug.WriteLine(e.Message);
             }
             con.Close();
+        }
+
+        public bool updateActivite(Activites activite)
+        {
+            openCon();
+            try
+            {
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "UPDATE activites SET nom=@nom, categorie_id=@categorie_id, prixCout=@prixCout, prixVente=@prixVente  WHERE id=@id";
+                cmd.Parameters.AddWithValue("nom", activite.Nom);
+                cmd.Parameters.AddWithValue("categorie_id",activite.CategorieId);
+                cmd.Parameters.AddWithValue("prixCout",activite.PrixCout);
+                cmd.Parameters.AddWithValue("prixVente",activite.PrixVente);
+                cmd.Parameters.AddWithValue("id", activite.Id);
+                
+                activiteListe.Add(activite);
+                cmd.ExecuteNonQuery();
+                con.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return false;
+            }
+        }
+        public bool ajoutActivite(Activites activite)
+        {
+            openCon();
+            try
+            {
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "INSERT INTO activites(nom,prixCout,prixVente,categorie_id) VALUES(@nom, @prixCout, @prixVente, @categorieId)";
+                cmd.Parameters.AddWithValue("nom", activite.Nom);
+                cmd.Parameters.AddWithValue("prixCout", activite.PrixCout);
+                cmd.Parameters.AddWithValue("prixVente", activite.PrixVente);
+                cmd.Parameters.AddWithValue("categorieId", activite.CategorieId);
+                cmd.ExecuteNonQuery();
+                activiteListe.Add(activite);
+                con.Close();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
         public void getAdherents()
         {
@@ -224,6 +271,7 @@ namespace proje_final
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "SELECT * FROM categories";
                 var reader = cmd.ExecuteReader();
+                categorieListe = new ObservableCollection<Categorie>();
                 while (reader.Read())
                 {
                     categorieListe.Add(
