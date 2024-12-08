@@ -124,6 +124,7 @@ namespace proje_final
             openCon();
             try
             {
+                Debug.WriteLine(activite.Nom);
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "UPDATE activites SET nom=@nom, categorie_id=@categorie_id, prixCout=@prixCout, prixVente=@prixVente  WHERE id=@id";
                 cmd.Parameters.AddWithValue("nom", activite.Nom);
@@ -163,6 +164,18 @@ namespace proje_final
             {
                 return false;
             }
+        }
+        public bool deleteActivite(int id)
+        {
+            foreach(var activite in activiteListe)
+            {
+                if(activite.Id == id)
+                {
+                    activiteListe.Remove(activite);
+                    return true;
+                }
+            }
+            return false;
         }
         public void getAdherents()
         {
@@ -354,7 +367,10 @@ namespace proje_final
                 cmd.Parameters.AddWithValue("id", id);
                 cmd.ExecuteNonQuery();
                 categorieListe.Remove(getCategorie(id));
+                activiteListe.Clear();
+                getActivites();
                 con.Close();
+
                 return true;
 
             }catch(Exception e)
@@ -374,6 +390,8 @@ namespace proje_final
                 cmd.Parameters.AddWithValue("imageLink", cat.ImageLink);
                 cmd.Parameters.AddWithValue("id", cat.Id.ToString());
                 cmd.ExecuteNonQuery();
+                activiteListe.Clear();
+                getActivites();
                 con.Close();
                 Debug.WriteLine("Debogage "+cat.Id);
 

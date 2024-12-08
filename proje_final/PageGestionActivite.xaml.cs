@@ -39,7 +39,8 @@ namespace proje_final
         private void btn_delete_Click(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
-            Singleton.getInstance().deleteAdherent(btn.Tag.ToString());
+            var id = btn.Tag.ToString();
+            Singleton.getInstance().deleteActivite(int.Parse(id));
 
         }
 

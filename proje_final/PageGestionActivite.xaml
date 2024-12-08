@@ -60,7 +60,7 @@
                                     <Image Source="{Binding ImageLink}" Stretch="UniformToFill"></Image>
                                 </StackPanel>
                                 <TextBlock Text="{Binding Nom, Mode=TwoWay}" HorizontalAlignment="Center" Margin="0 2 0 10" FontSize="22" FontWeight="Bold"/>
-                                <TextBlock Text="{Binding PrixCoutAvecSigne, Mode=OneWay}" Margin="0,2" FontSize="16" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding PrixCoutAvecSigne, Mode=TwoWay}" Margin="0,2" FontSize="16" FontWeight="Bold"/>
                                 <TextBlock Text="{Binding PrixVenteAvecSigne, Mode=TwoWay}" Margin="0,2" FontSize="16" FontWeight="Bold"/>
                                 <TextBlock Text="{Binding  CategorieNomAvecTexte, Mode=TwoWay}" Margin="0,2" FontSize="16" FontWeight="Bold"/>
                                 <StackPanel Margin="0 20 0 0" Orientation="Horizontal" HorizontalAlignment="Right">
