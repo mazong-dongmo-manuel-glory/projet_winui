@@ -56,24 +56,44 @@ namespace proje_final
             try
             {
                 var cmd = con.CreateCommand();
-                cmd.CommandText = "SELECT seances.*, activites.Nom as nomActivite FROM seances INNER JOIN activites ON activites.id = seances.idActivites";
+                cmd.CommandText = "SELECT seances.*, activites.Nom as nomActivite FROM seances INNER JOIN activites ON activites.id = seances.idActivite";
                 var reader = cmd.ExecuteReader();
                 var seance = new Seances();
+                Debug.WriteLine(reader.ToString());
                 while (reader.Read())
                 {
                     
                     seance.Id = reader.GetInt32("id");
+                    seance.NomActivite = reader.GetString("nomActivite");
                     seance.NombrePlace = reader.GetInt32("nombrePlace");
                     seance.NombrePlaceRestante = reader.GetInt32("nombrePlaceRestante");
                     seance.IdActivite = reader.GetInt32("idActivite");
+                    seance.DateOrganisation = reader.GetDateTime("dateOrganisation").ToString();
+                    seance.HeureOrganisation = reader.GetTimeSpan("heureOrganisation").ToString();
+                    Debug.WriteLine("Seance " + seance.NomActivite);
+                    seancesListe.Add(seance);
+                    
 
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Debug.WriteLine(e.Message);
 
             }
         } 
+        public bool deteleSeance(int id)
+        {
+            foreach(var seance in seancesListe)
+            {
+                if(seance.Id == id)
+                {
+                    seancesListe.Remove(seance);
+                    return true;
+                }
+            }
+            return false;
+        }
         public Activites getActivite(int id)
         {
             Activites act = new Activites(0,"",0,0,0,"","");
@@ -197,7 +217,6 @@ namespace proje_final
                                 reader.GetString("adresse")
                             );
                             adherentListe.Add(newAdhrent);
-                            Debug.WriteLine(newAdhrent.Numero);
                         }
                     }
                 }
@@ -393,7 +412,6 @@ namespace proje_final
                 activiteListe.Clear();
                 getActivites();
                 con.Close();
-                Debug.WriteLine("Debogage "+cat.Id);
 
                 return true;
             }

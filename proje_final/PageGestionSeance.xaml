@@ -9,7 +9,73 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <ScrollView>
 
-    </Grid>
+        <Grid Padding="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <!-- GridView affichant les categories -->
+            <StackPanel Grid.Row="0">
+                <AppBarButton Height="50" Width="50" FontSize="50" Icon="AddFriend" x:Name="app_bar_icon_add" Click="app_bar_icon_add_Click"></AppBarButton>
+            </StackPanel>
+
+            <GridView Grid.Row="1"
+                      x:Name="gridSeances"
+                      ItemsSource="{Binding seances, Mode=TwoWay}">
+
+                <!-- Style personnalisé des éléments GridView -->
+                <GridView.ItemContainerStyle>
+                    <Style TargetType="GridViewItem" BasedOn="{StaticResource DefaultGridViewItemStyle}">
+                        <Setter Property="Margin" Value="5,5,5,5"/>
+                    </Style>
+                </GridView.ItemContainerStyle>
+
+                <!-- Définition de la mise en page des éléments (wrap) -->
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid x:Name="MaxItemsWrapGrid"
+                                       MaximumRowsOrColumns="7"
+                                       Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+
+                <!-- Définition du DataTemplate pour chaque élément (Adherent) -->
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="local:Seances">
+                        <Border BorderBrush="Gray" BorderThickness="2" Margin="10">
+                            <StackPanel Width="300" Height="300" Margin="10">
+                                <!-- Affichage du nom de l'adhérent -->
+
+                                <TextBlock Text="{Binding NomActivite, Mode=TwoWay}" Margin="0,2" FontSize="16" FontWeight="Bold"/>
+                                <StackPanel Width="100" Height="100">
+
+                                </StackPanel>
+
+                                <!-- Bouton avec une icône intégrée -->
+                                <Button x:Name="btn_edit" Click="btn_edit_Click"  Tag="{Binding Id, Mode=TwoWay}" Width="50" Height="50" Margin="5">
+                                    <!-- Icône avec le texte -->
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <SymbolIcon Symbol="Edit" Width="20" Height="20" Margin="0,0,5,0"/>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                                <!-- Bouton avec 9une icône intégrée -->
+                                <Button x:Name="btn_delete" Click="btn_delete_Click"  Tag="{Binding Id,Mode=TwoWay}" Width="50" Height="50" Margin="5">
+                                    <!-- Icône avec le texte -->
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <SymbolIcon Symbol="Delete" Width="20" Height="20" Margin="0,0,5,0"/>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+        </Grid>
+    </ScrollView>
 </Page>

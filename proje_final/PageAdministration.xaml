@@ -39,7 +39,7 @@
             <!-- Bouton pour la gestion des séances -->
 
             <StackPanel Width="150" HorizontalAlignment="Center">
-                <Button>
+                <Button Click="VoirSeances_click">
                     <Image Source="Assets/training.png" Stretch="UniformToFill"/>
                 </Button>
                 <TextBlock Text="Séances" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"/>

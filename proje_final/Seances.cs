@@ -25,6 +25,8 @@ namespace proje_final
         public int NombrePlaceRestante { get => nombrePlaceRestante; set { nombrePlaceRestante = value; OnPropertyChanged(nameof(NombrePlaceRestante)); } }
         public string NomActivite { get => nomActivite; set { nomActivite = value; OnPropertyChanged(nameof(NomActivite)); } }
 
+
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
         {

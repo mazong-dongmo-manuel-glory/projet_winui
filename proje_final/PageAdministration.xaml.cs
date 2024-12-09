@@ -35,10 +35,14 @@ namespace proje_final
         {
             Singleton.mainFrame.Navigate(typeof(PageGestionActivite));
         }
-
+        private void VoirSeances_click(object sender, RoutedEventArgs e)
+        {
+            Singleton.mainFrame.Navigate(typeof(PageGestionSeance));
+        }
         private void btn_statistique_Click(object sender, RoutedEventArgs e)
         {
             Singleton.mainFrame.Navigate(typeof(PageStatistiques));
         }
+        
     }
 }
