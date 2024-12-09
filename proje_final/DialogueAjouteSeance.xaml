@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentDialog
+    x:Class="proje_final.DialogueAjouteSeance"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:proje_final"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    PrimaryButtonText="Ajouter"
+    SecondaryButtonText="Annuler"
+    >
+
+    <Grid>
+        <StackPanel Margin="20">
+            <!-- Affichage des erreurs -->
+            <TextBlock x:Name="txtErreur" Foreground="Red" TextWrapping="Wrap" Visibility="Collapsed" />
+
+            <!-- Champ pour Nom -->
+            <StackPanel Margin="0,10,0,0">
+                <TextBlock Text="Nom de la séance" Margin="0,0,0,5" FontWeight="SemiBold" />
+                <TextBox x:Name="txtNom" PlaceholderText="Entrez le nom de la séance" />
+            </StackPanel>
+
+            <!-- Champ pour Coût de l'organisation -->
+            <StackPanel Margin="0,10,0,0">
+                <TextBlock Text="Coût d'organisation" Margin="0,0,0,5" FontWeight="SemiBold" />
+                <TextBox x:Name="txtCoutOrganisation" PlaceholderText="Entrez le coût de l'organisation" />
+            </StackPanel>
+
+            <!-- Champ pour Prix du participant -->
+            <StackPanel Margin="0,10,0,0">
+                <TextBlock Text="Prix de participation" Margin="0,0,0,5" FontWeight="SemiBold" />
+                <TextBox x:Name="txtPrixParticipant" PlaceholderText="Entrez le prix de participation" />
+            </StackPanel>
+
+            <!-- Champ pour la Date de la séance -->
+            <StackPanel Margin="0,10,0,0">
+                <TextBlock Text="Date de la séance" Margin="0,0,0,5" FontWeight="SemiBold" />
+                <DatePicker x:Name="datePickerSeance" />
+            </StackPanel>
+
+            <!-- Champ pour l'Heure de la séance -->
+            <StackPanel Margin="0,10,0,0">
+                <TextBlock Text="Heure de la séance" Margin="0,0,0,5" FontWeight="SemiBold" />
+                <TimePicker x:Name="timePickerSeance" />
+            </StackPanel>
+
+
+        </StackPanel>
+    </Grid>
+</ContentDialog>

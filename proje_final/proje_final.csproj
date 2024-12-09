@@ -20,6 +20,7 @@
     <None Remove="DialogueConnexion.xaml" />
     <None Remove="DialogueEditActivite.xaml" />
     <None Remove="DialogueEditAdherent.xaml" />
+    <None Remove="DialogueEditSeance.xaml" />
     <None Remove="DialogueInscriptionActivite.xaml" />
     <None Remove="PageAdherent.xaml" />
     <None Remove="PageAdministration.xaml" />
@@ -55,6 +56,16 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="DialogueAjouteSeance.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="DialogueEditSeance.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="PageStatistiques.xaml">

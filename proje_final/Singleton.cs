@@ -56,13 +56,11 @@ namespace proje_final
             try
             {
                 var cmd = con.CreateCommand();
-                cmd.CommandText = "SELECT seances.*, activites.Nom as nomActivite FROM seances INNER JOIN activites ON activites.id = seances.idActivite";
+                cmd.CommandText = "SELECT seances.*, activites.Nom as nomActivite, categories.imageLink as imageLink FROM seances INNER JOIN activites ON activites.id = seances.idActivite INNER JOIN categories ON categories.id = activites.categorie_id";
                 var reader = cmd.ExecuteReader();
-                var seance = new Seances();
-                Debug.WriteLine(reader.ToString());
                 while (reader.Read())
                 {
-                    
+                    var seance = new Seances();
                     seance.Id = reader.GetInt32("id");
                     seance.NomActivite = reader.GetString("nomActivite");
                     seance.NombrePlace = reader.GetInt32("nombrePlace");
@@ -70,7 +68,7 @@ namespace proje_final
                     seance.IdActivite = reader.GetInt32("idActivite");
                     seance.DateOrganisation = reader.GetDateTime("dateOrganisation").ToString();
                     seance.HeureOrganisation = reader.GetTimeSpan("heureOrganisation").ToString();
-                    Debug.WriteLine("Seance " + seance.NomActivite);
+                    seance.ImageLink = reader.GetString("imageLink");
                     seancesListe.Add(seance);
                     
 

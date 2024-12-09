@@ -16,14 +16,21 @@ namespace proje_final
         public string heureOrganisation;
         public int nombrePlace;
         public int nombrePlaceRestante;
+        public string imageLink;
 
         public int Id { get => id; set { id = value; } }
         public int IdActivite { get=> idActivite; set { idActivite = value; OnPropertyChanged(nameof(IdActivite)); } }
-        public string DateOrganisation { get => dateOrganisation; set { dateOrganisation = value; OnPropertyChanged(nameof(DateOrganisation)); } }
-        public string HeureOrganisation { get => heureOrganisation; set { heureOrganisation = value; OnPropertyChanged(nameof(HeureOrganisation)); } }
-        public int NombrePlace { get => nombrePlace; set { nombrePlace = value; OnPropertyChanged(nameof(NombrePlace)); } }
-        public int NombrePlaceRestante { get => nombrePlaceRestante; set { nombrePlaceRestante = value; OnPropertyChanged(nameof(NombrePlaceRestante)); } }
-        public string NomActivite { get => nomActivite; set { nomActivite = value; OnPropertyChanged(nameof(NomActivite)); } }
+        public string DateOrganisation { get => dateOrganisation; set { dateOrganisation = value; OnPropertyChanged(nameof(DateOrganisation)); OnPropertyChanged(DateOrganisationAffichage); } }
+        public string HeureOrganisation { get => heureOrganisation; set { heureOrganisation = value; OnPropertyChanged(nameof(HeureOrganisation)); OnPropertyChanged(nameof(HeureOrganisationAffichage)); } }
+        public int NombrePlace { get => nombrePlace; set { nombrePlace = value; OnPropertyChanged(nameof(NombrePlace)); OnPropertyChanged(nameof(NombrePlaceAffichage)); } }
+        public int NombrePlaceRestante { get => nombrePlaceRestante; set { nombrePlaceRestante = value; OnPropertyChanged(nameof(NombrePlaceRestante)); OnPropertyChanged(nameof(NombrePlaceRestanteAffichage)); } }
+        public string ImageLink { get => imageLink; set { imageLink = value; OnPropertyChanged(ImageLink); } }
+        public string NomActivite { get => nomActivite; set { nomActivite = value; OnPropertyChanged(nameof(NomActivite)); OnPropertyChanged(NomSeance); } }
+        public string NomSeance { get => NomActivite + ": " + Id; }
+        public string DateOrganisationAffichage { get => "Date : " + DateOrganisation; }
+        public string NombrePlaceAffichage { get => "Le nombre de place disponible est : " + NombrePlace; }
+        public string NombrePlaceRestanteAffichage { get => "Le nombre de place restante est : " + NombrePlaceRestante; }
+        public string HeureOrganisationAffichage { get => "Heure  : " + HeureOrganisation; }
 
 
 

@@ -36,25 +36,25 @@
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <ItemsWrapGrid x:Name="MaxItemsWrapGrid"
-                                       MaximumRowsOrColumns="7"
+                                       MaximumRowsOrColumns="9"
                                        Orientation="Horizontal"/>
                     </ItemsPanelTemplate>
                 </GridView.ItemsPanel>
 
-                <!-- Définition du DataTemplate pour chaque élément (Adherent) -->
                 <GridView.ItemTemplate>
                     <DataTemplate x:DataType="local:Seances">
                         <Border BorderBrush="Gray" BorderThickness="2" Margin="10">
-                            <StackPanel Width="300" Height="300" Margin="10">
-                                <!-- Affichage du nom de l'adhérent -->
-
-                                <TextBlock Text="{Binding NomActivite, Mode=TwoWay}" Margin="0,2" FontSize="16" FontWeight="Bold"/>
+                            <StackPanel Width="310" Height="310" Margin="10">
+                                <TextBlock Text="{Binding NomSeance, Mode=TwoWay}" Margin="0,2" FontSize="16" FontWeight="Bold"/>
                                 <StackPanel Width="100" Height="100">
-
+                                    <Image Source="{Binding ImageLink}" Stretch="UniformToFill"></Image>
                                 </StackPanel>
 
-                                <!-- Bouton avec une icône intégrée -->
-                                <Button x:Name="btn_edit" Click="btn_edit_Click"  Tag="{Binding Id, Mode=TwoWay}" Width="50" Height="50" Margin="5">
+                                <TextBlock Text="{Binding HeureOrganisationAffichage, Mode=TwoWay}" Margin="0,2" FontSize="12" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding DateOrganisationAffichage, Mode=TwoWay}" Margin="0,2" FontSize="12" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding NombrePlaceAffichage, Mode=TwoWay}" Margin="0,2" FontSize="12" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding NombrePlaceRestanteAffichage, Mode=TwoWay}" Margin="0,2" FontSize="12" FontWeight="Bold"/>
+                                <Button x:Name="btn_edit" Click="btn_edit_Click"  Tag="{Binding Id, Mode=TwoWay}" Width="50" Height="40" Margin="5">
                                     <!-- Icône avec le texte -->
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -62,8 +62,7 @@
                                         </StackPanel>
                                     </Button.Content>
                                 </Button>
-                                <!-- Bouton avec 9une icône intégrée -->
-                                <Button x:Name="btn_delete" Click="btn_delete_Click"  Tag="{Binding Id,Mode=TwoWay}" Width="50" Height="50" Margin="5">
+                                <Button x:Name="btn_delete" Click="btn_delete_Click"  Tag="{Binding Id,Mode=TwoWay}" Width="50" Height="40" Margin="5">
                                     <!-- Icône avec le texte -->
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">

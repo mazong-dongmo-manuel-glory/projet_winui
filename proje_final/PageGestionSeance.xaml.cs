@@ -53,10 +53,11 @@ namespace proje_final
         }
 
         private async void app_bar_icon_add_Click(object sender, RoutedEventArgs e)
-        {
-            DialogueCategorie categorie = new DialogueCategorie();
-            categorie.XamlRoot = this.XamlRoot;
-            await categorie.ShowAsync();
+        { 
+            DialogueAjouteSeance dialogAjouteSeance = new DialogueAjouteSeance();
+
+            dialogAjouteSeance.XamlRoot = this.XamlRoot;
+            await dialogAjouteSeance.ShowAsync();
         }
     }
 }
