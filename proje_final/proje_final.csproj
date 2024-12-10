@@ -11,9 +11,35 @@
     <PublishProfile>win-$(Platform).pubxml</PublishProfile>
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
+    <DefaultLanguage>fr-CA</DefaultLanguage>
+    <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
+    <PackageIcon>iconpng.png</PackageIcon>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="CsvExporter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Assets\Arbre.altform-lightunplated_targetsize-16.png" />
+    <Content Remove="Assets\Arbre.altform-lightunplated_targetsize-24.png" />
+    <Content Remove="Assets\Arbre.altform-lightunplated_targetsize-256.png" />
+    <Content Remove="Assets\Arbre.altform-lightunplated_targetsize-32.png" />
+    <Content Remove="Assets\Arbre.altform-lightunplated_targetsize-48.png" />
+    <Content Remove="Assets\Arbre.altform-unplated_targetsize-16.png" />
+    <Content Remove="Assets\Arbre.altform-unplated_targetsize-24.png" />
+    <Content Remove="Assets\Arbre.altform-unplated_targetsize-256.png" />
+    <Content Remove="Assets\Arbre.altform-unplated_targetsize-32.png" />
+    <Content Remove="Assets\Arbre.altform-unplated_targetsize-48.png" />
+    <Content Remove="Assets\Arbre.scale-100.png" />
+    <Content Remove="Assets\Arbre.scale-125.png" />
+    <Content Remove="Assets\Arbre.scale-150.png" />
+    <Content Remove="Assets\Arbre.scale-200.png" />
+    <Content Remove="Assets\Arbre.scale-400.png" />
+    <Content Remove="Assets\Arbre.targetsize-16.png" />
+    <Content Remove="Assets\Arbre.targetsize-24.png" />
+    <Content Remove="Assets\Arbre.targetsize-256.png" />
+    <Content Remove="Assets\Arbre.targetsize-32.png" />
+    <Content Remove="Assets\Arbre.targetsize-48.png" />
+    <Content Remove="Assets\icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="DialogAjoutActivite.xaml" />
@@ -59,6 +85,15 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Assets\iconpng.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Page Update="DialogueAjouteSeance.xaml">
