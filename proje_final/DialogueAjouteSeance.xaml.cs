@@ -1,20 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace proje_final
 {
@@ -23,69 +10,74 @@ namespace proje_final
         public DialogueAjouteSeance()
         {
             this.InitializeComponent();
+
+            Singleton.getInstance().getActivites();
+            var activitesList = Singleton.getInstance().activiteListe;
+            comboBoxActivites.ItemsSource = activitesList;
+            comboBoxActivites.DisplayMemberPath = "Nom"; 
+            comboBoxActivites.SelectedValuePath = "Id"; 
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            txtErreur.Visibility = Visibility.Collapsed; // Cache le message d'erreur au début
-           
-            string nomSeance = txtNom.Text.Trim();
-            string coutOrganisation = txtCoutOrganisation.Text.Trim();
-            string prixParticipant = txtPrixParticipant.Text.Trim();
+
+            string nombrePlace = txtNombrePlace.Text.Trim();
             DateTime? dateSeance = datePickerSeance.Date.Date;
             TimeSpan? heureSeance = timePickerSeance.Time;
 
-            // Validation des champs
-            if (string.IsNullOrEmpty(nomSeance))
+            if (comboBoxActivites.SelectedItem == null)
             {
-                txtErreur.Text = "Le nom de la séance est requis.";
+                txtErreur.Text = "Veuillez sélectionner une activité.";
                 txtErreur.Visibility = Visibility.Visible;
+                args.Cancel = true;
                 return;
             }
+            var activiteSelectionnee = (Activites)comboBoxActivites.SelectedItem;
+            int idActivite = activiteSelectionnee.Id;
 
-            if (!decimal.TryParse(coutOrganisation, out _))
-            {
-                txtErreur.Text = "Le coût d'organisation doit être un nombre valide.";
-                txtErreur.Visibility = Visibility.Visible;
-                return;
-            }
+            // Liste d'erreurs
+            var errors = new List<string>();
 
-            if (!decimal.TryParse(prixParticipant, out _))
+           
+
+            if (!int.TryParse(nombrePlace, out int nombrePlaces))
             {
-                txtErreur.Text = "Le prix de participation doit être un nombre valide.";
-                txtErreur.Visibility = Visibility.Visible;
-                return;
+                errors.Add("Le nombre de places doit être un nombre valide.");
             }
 
             if (dateSeance == null)
             {
-                txtErreur.Text = "La date de la séance est requise.";
-                txtErreur.Visibility = Visibility.Visible;
-                return;
+                errors.Add("La date de la séance est requise.");
+            }
+            else if (dateSeance <= DateTime.Now.Date) 
+            {
+                errors.Add("La date de la séance doit être supérieure à la date actuelle.");
             }
 
             if (heureSeance == null)
             {
-                txtErreur.Text = "L'heure de la séance est requise.";
+                errors.Add("L'heure de la séance est requise.");
+            }
+
+            if (errors.Count > 0)
+            {
+                txtErreur.Text = string.Join("\n", errors);
                 txtErreur.Visibility = Visibility.Visible;
+                args.Cancel = true;
                 return;
             }
-            
 
-            // Si tout est valide, traiter l'ajout de la séance
-            // Exemple : Appeler une méthode pour sauvegarder les données
-            AjouterSeance(nomSeance, coutOrganisation, prixParticipant, dateSeance.Value, heureSeance.Value);
-        }
+            var nouvelleSeance = new Seances();
+            nouvelleSeance.IdActivite = idActivite;
+            nouvelleSeance.NombrePlace = nombrePlaces;
+            nouvelleSeance.NombrePlaceRestante = nombrePlaces;
+            nouvelleSeance.HeureOrganisation = heureSeance.ToString();
+            nouvelleSeance.DateOrganisation = dateSeance.ToString();
 
-        private void AjouterSeance(string nom, string cout, string prix, DateTime date, TimeSpan heure)
-        {
-            // Exemple de logique pour ajouter la séance
-            // Implémentez votre code de sauvegarde ici
 
-            // Afficher un message de confirmation (à adapter)
-           
+            Singleton.getInstance().AjouterSeance(nouvelleSeance);
+
+            this.Hide();
         }
     }
-
 }
-

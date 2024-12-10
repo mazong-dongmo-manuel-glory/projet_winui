@@ -33,17 +33,16 @@ namespace proje_final
         {
             var btn = sender as Button;
             var tag = btn.Tag.ToString();
-            var cat = Singleton.getInstance().getCategorie(tag);
-            DialogEditCategorie dialogEditCategorie = new DialogEditCategorie(cat.Id, cat.Nom, cat.ImageLink);
-            dialogEditCategorie.XamlRoot = this.XamlRoot;
-            await dialogEditCategorie.ShowAsync();
+            DialogueEditSeance dialogEditSeance = new DialogueEditSeance(int.Parse(tag));
+            dialogEditSeance.XamlRoot = this.XamlRoot;
+            await dialogEditSeance.ShowAsync();
         }
 
         private void btn_delete_Click(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
             var tag = btn.Tag.ToString();
-            Singleton.getInstance().deleteCategorie(tag);
+            Singleton.getInstance().deleteSeance(int.Parse(tag));
             Singleton.getInstance().getAllCategories();
             Singleton.getInstance().getActivites();
 

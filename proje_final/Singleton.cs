@@ -146,7 +146,18 @@ namespace proje_final
         }
 
 
-
+        public Seances getSeance(int id)
+        {
+           var seance = new Seances();
+            foreach (var sc in seancesListe)
+            {
+                if (sc.Id == id)
+                {
+                    seance = sc;
+                }
+            }
+            return seance;
+        }
         public void getSeances()
         {
             seancesListe.Clear(); // Vider la liste pour éviter les doublons
@@ -170,6 +181,7 @@ namespace proje_final
                     seance.ImageLink = reader.GetString("imageLink");
 
                     seancesListe.Add(seance);
+                   
                 }
             }
             catch (Exception e)
@@ -181,13 +193,20 @@ namespace proje_final
                 con.Close();
             }
         }
-        public bool deteleSeance(int id)
+        public bool deleteSeance(int id)
         {
             foreach(var seance in seancesListe)
             {
                 if(seance.Id == id)
                 {
+                    openCon();
+                    var cmd = con.CreateCommand();
+                    cmd.CommandText = "DELETE FROM seances WHERE id=@id";
+                    cmd.Parameters.AddWithValue("id", id);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
                     seancesListe.Remove(seance);
+                    getParticipations();
                     return true;
                 }
             }
@@ -231,8 +250,7 @@ namespace proje_final
                 cmd.Parameters.AddWithValue("@nombrePlaceRestante", seance.NombrePlaceRestante);
                 cmd.ExecuteNonQuery();
                 con.Close();
-
-                seancesListe.Add(seance);
+                getSeances();
                 return true;
             }
             catch (Exception e)
@@ -241,6 +259,7 @@ namespace proje_final
                 return false;
             }
         }
+       
 
 
 
@@ -345,6 +364,12 @@ namespace proje_final
             {
                 if(activite.Id == id)
                 {
+                    openCon();
+                    var cmd = con.CreateCommand();
+                    cmd.CommandText = "DELETE FROM activite WHERE id=@id";
+                    cmd.Parameters.AddWithValue("id", id);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
                     activiteListe.Remove(activite);
                     return true;
                 }
@@ -543,7 +568,6 @@ namespace proje_final
                 cmd.ExecuteNonQuery();
                 categorieListe.Remove(getCategorie(id));
                 activiteListe.Clear();
-                getActivites();
                 con.Close();
 
                 return true;

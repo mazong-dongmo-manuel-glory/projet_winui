@@ -32,9 +32,9 @@ namespace proje_final
             txtNom.Text = activite.Nom;
             txtCoutOrganisation.Text = activite.PrixCout.ToString();
             txtPrixParticipant.Text = activite.PrixVente.ToString();
-         
-           
-            
+
+
+
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
@@ -45,7 +45,8 @@ namespace proje_final
             try
             {
                 prixVente = int.Parse(txtPrixParticipant.Text);
-                if (prixVente < 1) {
+                if (prixVente < 1)
+                {
                     errors.Add("Le prix de vente n'est pas valide");
                 }
             }
@@ -68,19 +69,19 @@ namespace proje_final
             if (txtNom.Text.Length < 2)
             {
                 errors.Add("Le nom de l'activite n'est pas valide");
-                foreach(var act in Singleton.getInstance().activiteListe)
+                foreach (var act in Singleton.getInstance().activiteListe)
                 {
-                    if(act.Nom == txtNom.Text)
+                    if (act.Nom == txtNom.Text)
                     {
                         errors.Add("Une activite avec ce nom existe deja");
                     }
                 }
             }
-            if(cmbCategories.SelectedIndex < 0)
+            if (cmbCategories.SelectedIndex < 0)
             {
                 errors.Add("Selectionner une categorie");
             }
-            if(errors.Count != 0)
+            if (errors.Count != 0)
             {
                 txtErreur.Visibility = Visibility;
                 txtErreur.Text = String.Join("\n", errors.ToArray());
