@@ -27,6 +27,7 @@ namespace proje_final
 
             this.InitializeComponent();
             Singleton.getInstance().getActivites();
+            Singleton.getInstance().getSeances();
             singleton.getParticipations(); 
             activites = Singleton.getInstance().activiteListe;
             gridActivites.ItemsSource = activites;
