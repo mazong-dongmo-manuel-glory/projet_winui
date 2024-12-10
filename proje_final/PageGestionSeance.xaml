@@ -18,7 +18,7 @@
             </Grid.RowDefinitions>
             <!-- GridView affichant les categories -->
             <StackPanel Grid.Row="0">
-                <AppBarButton Height="50" Width="50" FontSize="50" Icon="AddFriend" x:Name="app_bar_icon_add" Click="app_bar_icon_add_Click"></AppBarButton>
+                <AppBarButton Height="50" Width="50" FontSize="50" Icon="AddFriend" x:Name="app_bar_icon_add" Visibility="{x:Bind CanDisplay2}" Click="app_bar_icon_add_Click"></AppBarButton>
             </StackPanel>
 
             <GridView Grid.Row="1"
@@ -53,8 +53,8 @@
                                 <TextBlock Text="{Binding HeureOrganisationAffichage, Mode=TwoWay}" Margin="0,2" FontSize="12" FontWeight="Bold"/>
                                 <TextBlock Text="{Binding DateOrganisationAffichage, Mode=TwoWay}" Margin="0,2" FontSize="12" FontWeight="Bold"/>
                                 <TextBlock Text="{Binding NombrePlaceAffichage, Mode=TwoWay}" Margin="0,2" FontSize="12" FontWeight="Bold"/>
-                                <TextBlock Text="{Binding NombrePlaceRestanteAffichage, Mode=TwoWay}" Margin="0,2" FontSize="12" FontWeight="Bold"/>
-                                <Button x:Name="btn_edit" Click="btn_edit_Click"  Tag="{Binding Id, Mode=TwoWay}" Width="50" Height="40" Margin="5">
+                                <TextBlock Text="{Binding NombrePlaceRestanteAffichage, Mode=TwoWay}" Margin="0,2,0,15" FontSize="12" FontWeight="Bold"/>
+                                <Button x:Name="btn_edit" Click="btn_edit_Click"  Tag="{Binding Id, Mode=TwoWay}" Visibility="{x:Bind CanDisplay}" Width="50" Height="40" Margin="5">
                                     <!-- Icône avec le texte -->
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -62,7 +62,7 @@
                                         </StackPanel>
                                     </Button.Content>
                                 </Button>
-                                <Button x:Name="btn_delete" Click="btn_delete_Click"  Tag="{Binding Id,Mode=TwoWay}" Width="50" Height="40" Margin="5">
+                                <Button x:Name="btn_delete" Click="btn_delete_Click"  Tag="{Binding Id,Mode=TwoWay}" Visibility="{x:Bind CanDisplay}" Width="50" Height="40" Margin="5">
                                     <!-- Icône avec le texte -->
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">

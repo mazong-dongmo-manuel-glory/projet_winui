@@ -21,25 +21,21 @@
             <!-- Première ligne : Affichage des erreurs -->
             <TextBlock x:Name="txtErreur" Foreground="Red" TextWrapping="Wrap" Visibility="Collapsed"/>
 
-            <!-- Champ pour Nom -->
-            <StackPanel Margin="0 10 0 0">
-                <ComboBox x:Name="cbCategorie" Header="Sélectionnez la catégorie du produit" ></ComboBox>
-                <TextBlock x:Name="erreur_description" FontSize="15" Foreground="Red"></TextBlock>
-            </StackPanel>
 
-            <!-- Champ pour La date-->
-            <StackPanel Margin="0,10,0,0">
-                <TextBlock> Choisisez la date souhaitez</TextBlock>
-                <CalendarDatePicker x:Name="dateChoisis"></CalendarDatePicker>
-
-            </StackPanel>
-
-            <!-- Champ pour l'heure -->
-            <StackPanel Margin="0,10,0,0">
-                <TextBlock> Choisisez l'heure souhaité</TextBlock>
-                <TimePicker x:Name="HeureChoisis"></TimePicker>
-
-            </StackPanel>
+            <ListView x:Name="SeancesListView" SelectionMode="Single">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:Seances">
+                        <Border BorderThickness="1" BorderBrush="Gray" Margin="5" Padding="10">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding HeureOrganisationAffichage, Mode=TwoWay}" Margin="0,2" FontSize="12" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding DateOrganisationAffichage, Mode=TwoWay}" Margin="0,2" FontSize="12" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding NombrePlaceAffichage, Mode=TwoWay}" Margin="0,2" FontSize="12" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding NombrePlaceRestanteAffichage, Mode=TwoWay}" Margin="0,2" FontSize="12" FontWeight="Bold"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
 
         </StackPanel>

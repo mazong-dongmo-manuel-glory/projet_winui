@@ -62,7 +62,7 @@
                                 <TextBlock Text="{Binding Nom, Mode=TwoWay}" HorizontalAlignment="Center" Margin="0 2 0 10" FontSize="22" FontWeight="Bold"/>
                                 <TextBlock Text="{Binding PrixCoutAvecSigne, Mode=TwoWay}" Margin="0,2" FontSize="16" FontWeight="Bold"/>
                                 <TextBlock Text="{Binding PrixVenteAvecSigne, Mode=TwoWay}" Margin="0,2" FontSize="16" FontWeight="Bold"/>
-                                <TextBlock Text="{Binding  CategorieNomAvecTexte, Mode=TwoWay}" Margin="0,2" FontSize="16" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding CategorieNomAvecTexte, Mode=TwoWay}" Margin="0,2" FontSize="16" FontWeight="Bold"/>
                                 <StackPanel Margin="0 20 0 0" Orientation="Horizontal" HorizontalAlignment="Right">
                                     <!-- Bouton avec une icône intégrée -->
                                     <Button x:Name="btn_edit" Click="btn_edit_Click" Tag="{Binding Id, Mode=TwoWay}" Width="50" Height="50" Margin="5" Visibility="{x:Bind CanDisplay}" >

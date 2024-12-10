@@ -19,17 +19,72 @@ namespace proje_final
 
     public sealed partial class DialogueInscriptionActivite : ContentDialog
     {
-        public DialogueInscriptionActivite()
+        public DialogueInscriptionActivite(int idActivite)
         {
             this.InitializeComponent();
-            dateChoisis.MinDate = DateTime.Now.AddDays(1);
-            dateChoisis.MaxDate = DateTime.Now.AddDays(365);
-            HeureChoisis.MinuteIncrement = 30;
+            Singleton.getInstance().getSeances();
+
+            // Récupère les séances disponibles pour l'activité
+            var seancesDisponibles = Singleton.getInstance().GetSeancesDisponiblesPourActivite(idActivite);
+
+            // Associe les séances à la liste déroulante ou ListView
+            SeancesListView.ItemsSource = seancesDisponibles;
+
+            // Si aucune séance n'est disponible, affiche un message
+            if (seancesDisponibles.Count == 0)
+            {
+                txtErreur.Text = "Aucune séance disponible pour cette activité.";
+                txtErreur.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                txtErreur.Visibility = Visibility.Collapsed;
+            }
         }
 
-        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+
+
+        private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
+            var selectedSeance = SeancesListView.SelectedItem as Seances;
 
+            if (selectedSeance == null)
+            {
+                txtErreur.Text = "Veuillez sélectionner une séance.";
+                txtErreur.Visibility = Visibility.Visible;
+                args.Cancel = true;
+                return;
+            }
+
+            // Réduire le nombre de places restantes
+            if (selectedSeance.NombrePlaceRestante > 0)
+            {
+                selectedSeance.NombrePlaceRestante--;
+                Singleton.getInstance().UpdateSeance(selectedSeance); // Mettez à jour dans la base de données
+            }
+            else
+            {
+                txtErreur.Text = "Cette séance n'a plus de places disponibles.";
+                txtErreur.Visibility = Visibility.Visible;
+                args.Cancel = true;
+                return;
+            }
+
+            // Générer un numéro de confirmation aléatoire
+            string numeroConfirmation = $"CONF-{Guid.NewGuid().ToString().Substring(0, 8).ToUpper()}";
+
+            
+            this.Hide();
+
+            // Message de confirmation
+            await new ContentDialog
+            {
+                Title = "Séance ajoutée",
+                Content = $"Votre inscription pour la séance du {selectedSeance.DateOrganisationAffichage} à {selectedSeance.HeureOrganisation} a été confirmée avec succès !\n\nNuméro de confirmation : {numeroConfirmation}",
+                CloseButtonText = "OK",
+                XamlRoot = this.XamlRoot
+            }.ShowAsync();
         }
+
     }
 }

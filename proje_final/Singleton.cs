@@ -15,6 +15,7 @@ namespace proje_final
 {
     internal class Singleton
     {
+        
         public static  Singleton instance;
         public Adherent adherent;
         public Administration administration;
@@ -30,6 +31,7 @@ namespace proje_final
         {
             con = new MySqlConnection("Server=cours.cegep3r.info;Database=a2024_420-345-ri_eq14;Uid=2304249;Pwd=2304249;");
         }
+    
 
         public Administration Admin { get { return administration; } }
 
@@ -52,6 +54,8 @@ namespace proje_final
         /* Recuperation des tables */
         public void getSeances()
         {
+            seancesListe.Clear(); // Vider la liste pour éviter les doublons
+
             openCon();
             try
             {
@@ -69,17 +73,19 @@ namespace proje_final
                     seance.DateOrganisation = reader.GetDateTime("dateOrganisation").ToString();
                     seance.HeureOrganisation = reader.GetTimeSpan("heureOrganisation").ToString();
                     seance.ImageLink = reader.GetString("imageLink");
-                    seancesListe.Add(seance);
-                    
 
+                    seancesListe.Add(seance);
                 }
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e.Message);
-
+                Debug.WriteLine($"Erreur lors de la récupération des séances : {e.Message}");
             }
-        } 
+            finally
+            {
+                con.Close();
+            }
+        }
         public bool deteleSeance(int id)
         {
             foreach(var seance in seancesListe)
@@ -92,6 +98,60 @@ namespace proje_final
             }
             return false;
         }
+
+        public void UpdateSeance(Seances seance)
+        {
+            openCon();
+            try
+            {
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "UPDATE seances SET nombrePlaceRestante = @nombrePlaceRestante WHERE id = @id";
+                cmd.Parameters.AddWithValue("@nombrePlaceRestante", seance.NombrePlaceRestante);
+                cmd.Parameters.AddWithValue("@id", seance.Id);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Erreur lors de la mise à jour de la séance : {ex.Message}");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+
+
+        public bool AjouterSeance(Seances seance)
+        {
+            try
+            {
+                openCon();
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "INSERT INTO seances (idActivite, dateOrganisation, heureOrganisation, nombrePlace, nombrePlaceRestante) VALUES (@idActivite, @dateOrganisation, @heureOrganisation, @nombrePlace, @nombrePlaceRestante)";
+                cmd.Parameters.AddWithValue("@idActivite", seance.IdActivite);
+                cmd.Parameters.AddWithValue("@dateOrganisation", DateTime.Parse(seance.DateOrganisation).ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@heureOrganisation", seance.HeureOrganisation);
+                cmd.Parameters.AddWithValue("@nombrePlace", seance.NombrePlace);
+                cmd.Parameters.AddWithValue("@nombrePlaceRestante", seance.NombrePlaceRestante);
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+                seancesListe.Add(seance);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Erreur lors de l'ajout de la séance : " + e.Message);
+                return false;
+            }
+        }
+
+
+
+
+
+
         public Activites getActivite(int id)
         {
             Activites act = new Activites(0,"",0,0,0,"","");
@@ -498,7 +558,40 @@ namespace proje_final
          
         }
 
-     
-       
+
+        public ObservableCollection<Seances> GetSeancesParAdherent(string numeroAdherent)
+        {
+            var seancesFiltrees = new ObservableCollection<Seances>();
+
+            foreach (var seance in seancesListe)
+            {
+               
+                if (seance.IdAdherent == numeroAdherent)
+                {
+                    seancesFiltrees.Add(seance);
+                }
+            }
+
+            return seancesFiltrees;
+        }
+
+
+        public ObservableCollection<Seances> GetSeancesDisponiblesPourActivite(int idActivite)
+        {
+            var seancesDisponibles = new ObservableCollection<Seances>();
+
+            foreach (var seance in seancesListe)
+            {
+                if (seance.IdActivite == idActivite && seance.NombrePlaceRestante > 0)
+                {
+                    seancesDisponibles.Add(seance);
+                }
+            }
+
+            return seancesDisponibles;
+        }
+
+
+
     }
 }

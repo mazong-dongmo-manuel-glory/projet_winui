@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.UI.Xaml;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -11,12 +12,14 @@ namespace proje_final
     {
         public int id;
         public int idActivite;
+        public string IdAdherent { get; set; }
         public string nomActivite;
         public string dateOrganisation;
         public string heureOrganisation;
         public int nombrePlace;
         public int nombrePlaceRestante;
         public string imageLink;
+
 
         public int Id { get => id; set { id = value; } }
         public int IdActivite { get=> idActivite; set { idActivite = value; OnPropertyChanged(nameof(IdActivite)); } }
@@ -27,10 +30,24 @@ namespace proje_final
         public string ImageLink { get => imageLink; set { imageLink = value; OnPropertyChanged(ImageLink); } }
         public string NomActivite { get => nomActivite; set { nomActivite = value; OnPropertyChanged(nameof(NomActivite)); OnPropertyChanged(NomSeance); } }
         public string NomSeance { get => NomActivite + ": " + Id; }
-        public string DateOrganisationAffichage { get => "Date : " + DateOrganisation; }
-        public string NombrePlaceAffichage { get => "Le nombre de place disponible est : " + NombrePlace; }
+        public string DateOrganisationAffichage
+        {
+            get
+            {
+                
+                if (DateTime.TryParse(dateOrganisation, out DateTime parsedDate))
+                {
+                    return "Date : " + parsedDate.ToString("yyyy-MM-dd");
+                }
+                return "Date invalide";
+            }
+        }
+        public string NombrePlaceAffichage { get => "Le nombre de place maximum est : " + NombrePlace; }
         public string NombrePlaceRestanteAffichage { get => "Le nombre de place restante est : " + NombrePlaceRestante; }
         public string HeureOrganisationAffichage { get => "Heure  : " + HeureOrganisation; }
+
+
+        public Visibility CanDisplay { get { return Singleton.getInstance().Admin == null ? Visibility.Collapsed : Visibility.Visible; } }
 
 
 

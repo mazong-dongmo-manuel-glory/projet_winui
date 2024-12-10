@@ -52,15 +52,18 @@ namespace proje_final
         }
 
         public Visibility CanDisplay2 { get { return Singleton.getInstance().Admin == null ? Visibility.Collapsed : Visibility.Visible; } }
-        
+
 
         private async void Inscription_activite_Click(object sender, RoutedEventArgs e)
         {
+            var button = sender as Button;
+            int activiteId = int.Parse(button.Tag.ToString());
 
-            DialogueInscriptionActivite dialogueInscriptionActivite = new DialogueInscriptionActivite();
-            dialogueInscriptionActivite.XamlRoot = this.XamlRoot;
+            DialogueInscriptionActivite dialogueInscriptionActivite = new DialogueInscriptionActivite(activiteId)
+            {
+                XamlRoot = this.XamlRoot
+            };
             await dialogueInscriptionActivite.ShowAsync();
-
         }
     }
 }

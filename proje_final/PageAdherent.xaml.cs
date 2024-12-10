@@ -28,7 +28,7 @@ namespace proje_final
        
         private void btn_seances_Click(object sender, RoutedEventArgs e)
         {
-
+            Singleton.mainFrame.Navigate(typeof(PageGestionSeance));
         }
 
         private void btn_activites_Click(object sender, RoutedEventArgs e)
