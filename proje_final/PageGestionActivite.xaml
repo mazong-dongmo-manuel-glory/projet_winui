@@ -45,7 +45,7 @@
                 <GridView.ItemTemplate>
                     <DataTemplate x:DataType="local:Activites">
                         <Border BorderBrush="Gray" BorderThickness="2" Margin="10">
-                            <StackPanel Width="300" Height="300" Margin="10">
+                            <StackPanel Width="300" Height="325" Margin="10">
 
 
                                 <StackPanel Grid.Row="0" Visibility="{x:Bind CanDisplay3}">

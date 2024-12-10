@@ -39,7 +39,7 @@ namespace proje_final
 
 
         public double MoyenneNote { get; set; }
-        public string MoyenneNoteAffichage { get => $"Note moyenne : {MoyenneNote:F2} / 5"; }
+        public string MoyenneNoteAffichage { get => $"Note moyenne : {MoyenneNote:F2} / 20"; }
 
 
 
