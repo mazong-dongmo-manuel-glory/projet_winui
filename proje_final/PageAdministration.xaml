@@ -59,6 +59,17 @@
             <StackPanel Width="150" HorizontalAlignment="Center">
                 <Button>
                     <Image Source="Assets/csv-file.png" Stretch="UniformToFill"/>
+                    <Button.Flyout>
+                        <Flyout>
+                            <StackPanel>
+                                <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Text="Que voulez-vous exporter ?" Margin="0,0,0,12" />
+                                <Button x:Name="btn_export_adherent" Click="btn_export_adherent_Click" Content="Adherents" />
+                                <Button x:Name="btn_export_activite" Click="btn_export_activite_Click" Content="Activites" />
+                            </StackPanel>
+                        </Flyout>
+                    </Button.Flyout>
+                   
+
                 </Button>
                 <TextBlock Text="CSV" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"/>
             </StackPanel>

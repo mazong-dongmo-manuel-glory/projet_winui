@@ -13,6 +13,9 @@
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="CsvExporter.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="DialogAjoutActivite.xaml" />
     <None Remove="DialogEditCategorie.xaml" />
     <None Remove="DialogueAjouteAdherent.xaml" />

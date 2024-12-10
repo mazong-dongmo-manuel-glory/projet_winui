@@ -95,6 +95,7 @@ namespace proje_final
                 activite.CategorieId = cat.Id;
                 activite.CategorieNom = cat.Nom;
                 Singleton.getInstance().updateActivite(activite);
+                Singleton.getInstance().getSeances();
             }
         }
     }

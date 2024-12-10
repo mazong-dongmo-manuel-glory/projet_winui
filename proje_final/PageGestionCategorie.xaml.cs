@@ -48,8 +48,8 @@ namespace proje_final
             var btn = sender as Button;
             var tag = btn.Tag.ToString();
             Singleton.getInstance().deleteCategorie(tag);
-            Singleton.getInstance().getAllCategories();
             Singleton.getInstance().getActivites();
+            Singleton.getInstance().getSeances();
 
         }
 

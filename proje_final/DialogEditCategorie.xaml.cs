@@ -64,6 +64,8 @@ namespace proje_final
                 cat.Nom = NomCategorie.Text;
                 cat.ImageLink = ImageLink.Text;
                 Singleton.getInstance().updateCategorie(cat);
+                Singleton.getInstance().getActivites();
+                Singleton.getInstance().getSeances();
                
 
             }

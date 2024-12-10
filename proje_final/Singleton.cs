@@ -261,6 +261,7 @@ namespace proje_final
         }
         public void getActivites()
         {
+            activiteListe.Clear();
             openCon();
             try
             {
@@ -352,6 +353,7 @@ namespace proje_final
         }
         public void getAdherents()
         {
+            adherentListe.Clear();
             try
             {
                 openCon();
@@ -476,6 +478,7 @@ namespace proje_final
         public void getAllCategories()
         {
             openCon();
+            categorieListe.Clear();
             try
             {
                 var cmd = con.CreateCommand();

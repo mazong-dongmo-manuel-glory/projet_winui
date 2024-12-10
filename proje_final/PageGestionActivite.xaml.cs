@@ -56,12 +56,14 @@ namespace proje_final
             DialogueEditActivite dialogEditActivite = new DialogueEditActivite(numero);
             dialogEditActivite.XamlRoot = this.XamlRoot;
             await dialogEditActivite.ShowAsync();
+           
         }
         private void btn_delete_Click(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
             var id = btn.Tag.ToString();
             Singleton.getInstance().deleteActivite(int.Parse(id));
+            Singleton.getInstance().getSeances();
 
         }
 
