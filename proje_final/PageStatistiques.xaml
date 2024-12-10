@@ -39,17 +39,17 @@
             <TextBlock Grid.Column="4" Grid.ColumnSpan="2" FontSize="20" FontFamily="colibri" Margin="5" HorizontalAlignment="Center" FontWeight="SemiBold">Statistique Adhérents</TextBlock>
             <Border BorderBrush="Gray" BorderThickness="2" CornerRadius="20"  Grid.Column="4" Grid.ColumnSpan="2" Grid.RowSpan="5" Margin="0 30 0 30">
                 <StackPanel HorizontalAlignment="Center" Margin="5">
-                    <TextBlock HorizontalAlignment="Center" FontWeight="Bold">Nombre d'adhérents</TextBlock>
-                    <TextBlock HorizontalAlignment="Center" Margin="5" x:Name="nb_total_adherent"></TextBlock>
+                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" HorizontalTextAlignment="Center" FontWeight="Bold">Nombre d'adhérents</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" HorizontalTextAlignment="Center" Margin="5" x:Name="nb_total_adherent"></TextBlock>
                     <MenuFlyoutSeparator></MenuFlyoutSeparator>
 
-                    <TextBlock HorizontalAlignment="Center" FontWeight="Bold" Margin="5">L'adhérent ayant le plus d'inscription???</TextBlock>
-                    <TextBlock HorizontalAlignment="Center" Margin="5" x:Name="txt_adherent_plus_insrciption"></TextBlock>
+                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" HorizontalTextAlignment="Center" FontWeight="Bold" Margin="5">L'adhérent ayant le plus d'inscription???</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" HorizontalTextAlignment="Center" Margin="5" x:Name="txt_adherent_plus_insrciption"></TextBlock>
                     <MenuFlyoutSeparator></MenuFlyoutSeparator>
 
-                    <TextBlock HorizontalAlignment="Center" Margin="5" TextWrapping="Wrap" HorizontalTextAlignment="Center" FontWeight="Bold">Nombre d'adhérents pour chacune des activités</TextBlock>
+                    <TextBlock HorizontalAlignment="Center"  Margin="5" TextWrapping="Wrap" HorizontalTextAlignment="Center" FontWeight="Bold">Nombre d'adhérents pour chacune des activités</TextBlock>
                     <ComboBox HorizontalAlignment="Center" Margin="5" x:Name="cb_adherent_chaque_activites"></ComboBox>
-                    <TextBlock HorizontalAlignment="Center" Margin="5" x:Name="nb_adherent_chaque_activites"></TextBlock>
+                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" HorizontalTextAlignment="Center" Margin="5" x:Name="nb_adherent_chaque_activites"></TextBlock>
                     <MenuFlyoutSeparator></MenuFlyoutSeparator>
 
 
@@ -61,24 +61,24 @@
             <Border BorderBrush="Gray" BorderThickness="2" CornerRadius="20" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="5" Margin="0 30 0 30">
 
                 <StackPanel HorizontalAlignment="Center" Margin="5">
-                    <TextBlock HorizontalAlignment="Center" Margin="5" FontWeight="Bold">Nombre d'activités</TextBlock>
-                    <TextBlock HorizontalAlignment="Center" Margin="5" x:Name="nbActivite">Total : 0</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Margin="5" TextWrapping="Wrap" HorizontalTextAlignment="Center" FontWeight="Bold">Nombre d'activités</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Margin="5" TextWrapping="Wrap" HorizontalTextAlignment="Center" x:Name="nbActivite">Total : 0</TextBlock>
                     <MenuFlyoutSeparator></MenuFlyoutSeparator>
 
-                    <TextBlock HorizontalAlignment="Center" Margin="5" FontWeight="Bold">Nombre de catégories</TextBlock>
-                    <TextBlock HorizontalAlignment="Center" Margin="5" x:Name="nbCategorie">Total : 0</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" HorizontalTextAlignment="Center" Margin="5" FontWeight="Bold">Nombre de catégories</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" HorizontalTextAlignment="Center" Margin="5" x:Name="nbCategorie">Total : 0</TextBlock>
 
                     <MenuFlyoutSeparator></MenuFlyoutSeparator>
 
                     <TextBlock HorizontalAlignment="Center" Margin="5" TextWrapping="Wrap" HorizontalTextAlignment="Center" FontWeight="Bold">Moyenne des notes d'appréciation pour chacune des activités</TextBlock>
-                    <ComboBox HorizontalAlignment="Center" Margin="5" x:Name="cb_MoyenneNoteChaqueActivites"></ComboBox>
-                    <TextBlock HorizontalAlignment="Center" x:Name="nbMoyenneNoteChaqueActivites" Margin="5"></TextBlock>
+                    <ComboBox HorizontalAlignment="Center" Margin="5"   x:Name="cb_MoyenneNoteChaqueActivites"></ComboBox>
+                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" HorizontalTextAlignment="Center" x:Name="nbMoyenneNoteChaqueActivites" Margin="5"></TextBlock>
 
                     <MenuFlyoutSeparator></MenuFlyoutSeparator>
 
 
-                    <TextBlock HorizontalAlignment="Center" Margin="5" TextWrapping="Wrap" HorizontalTextAlignment="Center" FontWeight="Bold">L'activité la mieu noté</TextBlock>
-                    <TextBlock HorizontalTextAlignment="Center" x:Name="txt_activite_plus_populaire">Natation</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Margin="5" TextWrapping="Wrap" HorizontalTextAlignment="Center" FontWeight="Bold">L'activité la mieu notée</TextBlock>
+                    <TextBlock HorizontalTextAlignment="Center" TextWrapping="Wrap" x:Name="txt_activite_plus_populaire">Natation</TextBlock>
 
 
                 </StackPanel>
@@ -90,13 +90,13 @@
             <Border BorderBrush="Gray" BorderThickness="2" CornerRadius="20" Grid.Column="7" Grid.ColumnSpan="2" Grid.RowSpan="5" Margin="0 30 0 30">
                 <StackPanel HorizontalAlignment="Center" Margin="5">
 
-                    <TextBlock HorizontalAlignment="Center" Margin="5" FontWeight="Bold">Nombre de séances</TextBlock>
-                    <TextBlock HorizontalAlignment="Center" Margin="5" x:Name="nb_total_seances">Total : 0</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Margin="5" TextWrapping="Wrap" HorizontalTextAlignment="Center" FontWeight="Bold">Nombre de séances</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Margin="5" TextWrapping="Wrap" HorizontalTextAlignment="Center" x:Name="nb_total_seances">Total : 0</TextBlock>
 
                     <MenuFlyoutSeparator></MenuFlyoutSeparator>
 
-                    <TextBlock HorizontalAlignment="Center" Margin="5" FontWeight="Bold">Séance la plus populaire</TextBlock>
-                    <TextBlock HorizontalAlignment="Center" Margin="5" x:Name="txt_seance_plus_populaire"></TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Margin="5" TextWrapping="Wrap" HorizontalTextAlignment="Center" FontWeight="Bold">Séance la plus populaire</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Margin="5" TextWrapping="Wrap" HorizontalTextAlignment="Center" x:Name="txt_seance_plus_populaire"></TextBlock>
                     <MenuFlyoutSeparator></MenuFlyoutSeparator>
 
                 </StackPanel>

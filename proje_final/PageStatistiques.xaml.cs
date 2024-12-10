@@ -39,6 +39,9 @@ namespace proje_final
             int totalCategories = bd.GetTotalcategorie();
             nbCategorie.Text = $"Total : {totalCategories}";
 
+            int totalSeances = bd.GetTotalSeance();
+            nb_total_seances.Text = $"Total : {totalSeances}";
+
 
             var adherentsParActivite = bd.GetNombreAdherentsParActivite();
             string adherentsDetails = string.Join("\n", adherentsParActivite.Select(kvp => $"{kvp.Key} : {kvp.Value} adhérents"));

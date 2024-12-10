@@ -33,7 +33,10 @@ namespace proje_final
         public App()
         {
             this.InitializeComponent();
+           
         }
+
+       
 
         /// <summary>
         /// Invoked when the application is launched.

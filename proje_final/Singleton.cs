@@ -667,6 +667,7 @@ namespace proje_final
 
         public int GetTotalActivite()
         {
+            Singleton.getInstance().getActivites();
             return activiteListe.Count;
         }
 
@@ -675,10 +676,25 @@ namespace proje_final
             return categorieListe.Count;
         }
 
+        public int GetTotalSeance()
+        {
+            Singleton.getInstance().getSeances();
+            return seancesListe.Count;
+        }
+
         public void rechercherAdherentNom(string v)
         {
          
         }
+
+
+
+       
+        /// /////////////////////////////////////////////////// ///
+
+
+
+
 
 
         public ObservableCollection<Seances> GetSeancesParAdherent(string numeroAdherent)

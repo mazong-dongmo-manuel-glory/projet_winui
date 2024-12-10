@@ -54,7 +54,7 @@
                                 </StackPanel>
 
                                 <!-- Bouton avec une icône intégrée -->
-                                <Button x:Name="btn_edit" Click="btn_edit_Click"  Tag="{Binding Id, Mode=TwoWay}" Width="50" Height="50" Margin="5" Visibility="{x:Bind CanDisplay}">
+                                <Button x:Name="btn_edit" Click="btn_edit_Click" HorizontalAlignment="Right"  Tag="{Binding Id, Mode=TwoWay}" Width="50" Height="50" Margin="5" Visibility="{x:Bind CanDisplay}">
                                     <!-- Icône avec le texte -->
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -63,7 +63,7 @@
                                     </Button.Content>
                                 </Button>
                                 <!-- Bouton avec une icône intégrée -->
-                                <Button x:Name="btn_delete" Click="btn_delete_Click"  Tag="{Binding Id,Mode=TwoWay}" Width="50" Height="50" Margin="5"  Visibility="{x:Bind CanDisplay}">
+                                <Button x:Name="btn_delete" Click="btn_delete_Click" HorizontalAlignment="Right"  Tag="{Binding Id,Mode=TwoWay}" Width="50" Height="50" Margin="5"  Visibility="{x:Bind CanDisplay}">
                                     <!-- Icône avec le texte -->
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
