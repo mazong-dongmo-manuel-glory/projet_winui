@@ -23,11 +23,32 @@ namespace proje_final
         ObservableCollection<Activites> activites;
         public PageGestionActivite()
         {
+            var singleton = Singleton.getInstance();
+
             this.InitializeComponent();
             Singleton.getInstance().getActivites();
+            singleton.getParticipations(); 
             activites = Singleton.getInstance().activiteListe;
             gridActivites.ItemsSource = activites;
+
+
+
+            // Calculer les moyennes des notes
+            var moyennesNotes = singleton.GetMoyenneNotesParActivite();
+            foreach (var activite in singleton.activiteListe)
+            {
+                if (moyennesNotes.ContainsKey(activite.Id))
+                {
+                    activite.MoyenneNote = moyennesNotes[activite.Id];
+                }
+            }
+
+            activites = singleton.activiteListe;
+            gridActivites.ItemsSource = activites;
+
         }
+
+
         private async void btn_edit_Click(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;

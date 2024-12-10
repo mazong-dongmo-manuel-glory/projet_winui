@@ -17,7 +17,7 @@ using Windows.Foundation.Collections;
 
 namespace proje_final
 {
-   
+
     public sealed partial class PageAdherent : Page
     {
         public PageAdherent()
@@ -25,7 +25,7 @@ namespace proje_final
             this.InitializeComponent();
         }
 
-       
+
         private void btn_seances_Click(object sender, RoutedEventArgs e)
         {
             Singleton.mainFrame.Navigate(typeof(PageGestionSeance));
@@ -35,5 +35,6 @@ namespace proje_final
         {
             Singleton.mainFrame.Navigate(typeof(PageGestionActivite));
         }
+
     }
 }

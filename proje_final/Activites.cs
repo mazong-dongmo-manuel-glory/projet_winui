@@ -37,6 +37,13 @@ namespace proje_final
         public string CategorieNom { get => categorie_nom; set { categorie_nom = value; OnPropertyChanged(nameof(CategorieNom)); OnPropertyChanged(nameof(CategorieNomAvecTexte)); } }
         public string CategorieNomAvecTexte { get => "Catégorie : " + categorie_nom; }
 
+
+        public double MoyenneNote { get; set; }
+        public string MoyenneNoteAffichage { get => $"Note moyenne : {MoyenneNote:F2} / 5"; }
+
+
+
+
         public Activites(int id, string  nom, int categorie_id, int prixCout, int prixVente, string imageLink, string categorie_nom)
         {
             this.nom = nom;

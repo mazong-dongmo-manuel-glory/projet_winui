@@ -40,6 +40,11 @@ namespace proje_final
             nbCategorie.Text = $"Total : {totalCategories}";
 
 
+            var adherentsParActivite = bd.GetNombreAdherentsParActivite();
+            string adherentsDetails = string.Join("\n", adherentsParActivite.Select(kvp => $"{kvp.Key} : {kvp.Value} adhérents"));
+           // adherents_par_activite.Text = adherentsDetails;
+
+
         }
     }
 }

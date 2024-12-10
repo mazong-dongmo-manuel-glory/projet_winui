@@ -23,6 +23,8 @@ namespace proje_final
         public ObservableCollection<Categorie> categorieListe = new ObservableCollection<Categorie>();
         public ObservableCollection<Activites> activiteListe = new ObservableCollection<Activites>();
         public ObservableCollection<Seances> seancesListe = new ObservableCollection<Seances>();
+        public ObservableCollection<Participation> participationsListe = new ObservableCollection<Participation>();
+
         public static MainWindow mainWindow;
         public static Frame mainFrame;
         MySqlConnection con;
@@ -52,6 +54,99 @@ namespace proje_final
             }
         }
         /* Recuperation des tables */
+
+
+
+
+        public void getParticipations()
+        {
+            participationsListe.Clear(); // Vider la liste pour éviter les doublons
+
+            openCon();
+            try
+            {
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "SELECT * FROM participations";
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    var participation = new Participation
+                    {
+                        IdParticipation = reader.GetInt32("idParticipation"),
+                        IdSeance = reader.GetInt32("idSeance"),
+                        NumeroAdherent = reader.GetString("numeroAdherent"),
+                        Note = reader.GetInt32("note")
+                    };
+
+                    Debug.WriteLine($"Participation : idParticipation={participation.IdParticipation}, idSeance={participation.IdSeance}, note={participation.Note}");
+
+                    participationsListe.Add(participation);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Erreur lors de la récupération des participations : {ex.Message}");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+
+        public bool AjouterParticipation(Participation participation)
+        {
+            openCon();
+            try
+            {
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "INSERT INTO participations (idSeance, numeroAdherent, note) VALUES (@idSeance, @numeroAdherent, @note)";
+                cmd.Parameters.AddWithValue("@idSeance", participation.IdSeance);
+                cmd.Parameters.AddWithValue("@numeroAdherent", participation.NumeroAdherent);
+                cmd.Parameters.AddWithValue("@note", participation.Note);
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+                participationsListe.Add(participation);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Erreur lors de l'ajout de la participation : {ex.Message}");
+                return false;
+            }
+        }
+
+
+        public bool ModifierNoteParticipation(int idParticipation, int nouvelleNote)
+        {
+            openCon();
+            try
+            {
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "UPDATE participations SET note = @note WHERE idParticipation = @idParticipation";
+                cmd.Parameters.AddWithValue("@note", nouvelleNote);
+                cmd.Parameters.AddWithValue("@idParticipation", idParticipation);
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+                var participation = participationsListe.FirstOrDefault(p => p.IdParticipation == idParticipation);
+                if (participation != null)
+                {
+                    participation.Note = nouvelleNote;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Erreur lors de la mise à jour de la note : {ex.Message}");
+                return false;
+            }
+        }
+
+
+
         public void getSeances()
         {
             seancesListe.Clear(); // Vider la liste pour éviter les doublons
@@ -589,6 +684,86 @@ namespace proje_final
             }
 
             return seancesDisponibles;
+        }
+
+        public Dictionary<string, int> GetNombreAdherentsParActivite()
+        {
+            var adherentsParActivite = new Dictionary<string, int>();
+
+            foreach (var activite in activiteListe)
+            {
+                int count = seancesListe
+                    .Where(s => s.IdActivite == activite.Id)
+                    .Select(s => s.IdAdherent)
+                    .Distinct()
+                    .Count();
+
+                adherentsParActivite[activite.Nom] = count;
+            }
+
+            return adherentsParActivite;
+        }
+
+
+        public void AjouterOuModifierNote(int idParticipation, int note)
+{
+    openCon();
+    try
+    {
+        var cmd = con.CreateCommand();
+        cmd.CommandText = "UPDATE participations SET note = @note WHERE idParticipation = @idParticipation";
+        cmd.Parameters.AddWithValue("@note", note);
+        cmd.Parameters.AddWithValue("@idParticipation", idParticipation);
+        cmd.ExecuteNonQuery();
+    }
+    catch (Exception ex)
+    {
+        Debug.WriteLine($"Erreur lors de l'ajout ou de la modification de la note : {ex.Message}");
+    }
+    finally
+    {
+        con.Close();
+    }
+}
+
+
+        public Dictionary<int, double> GetMoyenneNotesParActivite()
+        {
+            var moyenneNotes = new Dictionary<int, double>();
+
+            foreach (var activite in activiteListe)
+            {
+                Debug.WriteLine($"Traitement de l'activité : {activite.Nom} (ID : {activite.Id})");
+
+                foreach (var participation in participationsListe)
+                {
+                    var seanceAssociee = seancesListe.FirstOrDefault(s => s.Id == participation.IdSeance);
+
+                    if (seanceAssociee != null && seanceAssociee.IdActivite == activite.Id)
+                    {
+                        Debug.WriteLine($"Participation liée : idParticipation={participation.IdParticipation}, idSeance={participation.IdSeance}, note={participation.Note}, Activité={activite.Nom}");
+                    }
+                }
+
+                var notes = participationsListe
+                    .Where(p => seancesListe.Any(s =>
+                        s.Id == p.IdSeance &&
+                        s.IdActivite == activite.Id))
+                    .Select(p => p.Note);
+
+                Debug.WriteLine($"Notes trouvées pour {activite.Nom} : {string.Join(", ", notes)}");
+
+                moyenneNotes[activite.Id] = notes.Any() ? notes.Average() : 0;
+
+                Debug.WriteLine($"Moyenne calculée pour {activite.Nom} : {moyenneNotes[activite.Id]}");
+            }
+
+            return moyenneNotes;
+        }
+
+        public bool EstDejaInscrit(int idSeance, string numeroAdherent)
+        {
+            return participationsListe.Any(p => p.IdSeance == idSeance && p.NumeroAdherent == numeroAdherent);
         }
 
 
