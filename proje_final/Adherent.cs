@@ -9,10 +9,14 @@ namespace proje_final
     internal class Adherent : INotifyPropertyChanged
     {
         public string Nom { get => nom; set { nom = value; this.onPropertyChanged(nameof(Nom)); } }
-        public string Numero { get => numero; set { numero = value; this.onPropertyChanged(nameof(Numero)); } }
         public string Prenom { get => prenom; set { prenom = value; this.onPropertyChanged(nameof(Prenom)); } }
+        public string NomComplet { get => nom + ", " + prenom; }
+
+        public string Numero { get => numero; set { numero = value; this.onPropertyChanged(nameof(Numero)); } }
         public string DateNaissance { get => dateNaissance; set { dateNaissance = value; this.onPropertyChanged(nameof(DateNaissance)); } }
+        public string DateNaissanceString { get => "Date de naissance : " + dateNaissance; }
         public string Adresse { get => adresse; set { adresse = value; this.onPropertyChanged(nameof(Adresse)); } }
+        public string AdresseString { get => "Adresse : " + adresse; }
 
         public string nom;
         public string prenom;
