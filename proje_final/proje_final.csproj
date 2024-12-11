@@ -51,6 +51,7 @@
     <None Remove="DialogueEditAdherent.xaml" />
     <None Remove="DialogueEditSeance.xaml" />
     <None Remove="DialogueInscriptionActivite.xaml" />
+    <None Remove="DialogueNoterActivite.xaml" />
     <None Remove="PageAdherent.xaml" />
     <None Remove="PageAdministration.xaml" />
     <None Remove="PageBlanche.xaml" />
@@ -94,6 +95,9 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+    <Page Update="DialogueNoterActivite.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="DialogueAjouteSeance.xaml">

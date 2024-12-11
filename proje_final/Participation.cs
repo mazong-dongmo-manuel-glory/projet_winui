@@ -45,7 +45,11 @@ namespace proje_final
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-    
+
+      
+
+
+
 
     }
 }

@@ -66,7 +66,8 @@ namespace proje_final
                         mainFrame.Navigate(typeof(PageAdherent));
                     } else
                     {
-                        app_bar_icon.IsEnabled = false;
+                        
+                        headerTextBlock.Text = "Espace visiteur";
                         mainFrame.Navigate(typeof(PageBlanche));
                     }
 

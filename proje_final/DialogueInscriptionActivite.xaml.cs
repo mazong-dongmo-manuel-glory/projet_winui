@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -24,13 +25,13 @@ namespace proje_final
             this.InitializeComponent();
             Singleton.getInstance().getSeances();
 
-            // Récupère les séances disponibles pour l'activité
+         
             var seancesDisponibles = Singleton.getInstance().GetSeancesDisponiblesPourActivite(idActivite);
 
-            // Associe les séances à la liste déroulante ou ListView
+          
             SeancesListView.ItemsSource = seancesDisponibles;
 
-            // Si aucune séance n'est disponible, affiche un message
+       
             if (seancesDisponibles.Count == 0)
             {
                 txtErreur.Text = "Aucune séance disponible pour cette activité.";
@@ -47,6 +48,7 @@ namespace proje_final
         private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             var selectedSeance = SeancesListView.SelectedItem as Seances;
+            var bd = Singleton.getInstance();
 
             if (selectedSeance == null)
             {
@@ -56,11 +58,62 @@ namespace proje_final
                 return;
             }
 
-            // Réduire le nombre de places restantes
+      
+            if (bd.adherent == null)
+            {
+                txtErreur.Text = "Erreur : Aucun adhérent connecté.";
+                txtErreur.Visibility = Visibility.Visible;
+                args.Cancel = true;
+                return;
+            }
+
+          
+            if (bd.EstDejaInscrit(selectedSeance.Id, bd.adherent.Numero))
+            {
+                txtErreur.Text = "Vous êtes déjà inscrit à cette séance.";
+                txtErreur.Visibility = Visibility.Visible;
+                args.Cancel = true;
+                return;
+            }
+
+            
+            var nouvelleParticipation = new Participation
+            {
+                IdSeance = selectedSeance.Id,
+                NumeroAdherent = Singleton.getInstance().adherent.Numero, 
+                Note = 0
+            };
+
+         
+            Debug.WriteLine($"Nouvelle participation : Seance={nouvelleParticipation.IdSeance}, Adherent={nouvelleParticipation.NumeroAdherent}");
+
+
+            if (string.IsNullOrEmpty(Singleton.getInstance().adherent.Numero))
+            {
+                txtErreur.Text = "Erreur : Impossible de trouver le numéro de l'adhérent connecté.";
+                txtErreur.Visibility = Visibility.Visible;
+                args.Cancel = true;
+                return;
+            }
+
+
+            Debug.WriteLine($"Insertion dans la BD : IdSeance={nouvelleParticipation.IdSeance}, NumeroAdherent={nouvelleParticipation.NumeroAdherent}, Note={nouvelleParticipation.Note}");
+
+
+
+            if (!bd.AjouterParticipation(nouvelleParticipation))
+            {
+                txtErreur.Text = "Une erreur s'est produite lors de l'inscription. Veuillez réessayer.";
+                txtErreur.Visibility = Visibility.Visible;
+                args.Cancel = true;
+                return;
+            }
+
+     
             if (selectedSeance.NombrePlaceRestante > 0)
             {
                 selectedSeance.NombrePlaceRestante--;
-                Singleton.getInstance().UpdateSeance(selectedSeance); // Mettez à jour dans la base de données
+                bd.UpdateSeance(selectedSeance);
             }
             else
             {
@@ -70,13 +123,12 @@ namespace proje_final
                 return;
             }
 
-            // Générer un numéro de confirmation aléatoire
+         
             string numeroConfirmation = $"CONF-{Guid.NewGuid().ToString().Substring(0, 8).ToUpper()}";
 
-            
             this.Hide();
 
-            // Message de confirmation
+           
             await new ContentDialog
             {
                 Title = "Séance ajoutée",
@@ -85,6 +137,8 @@ namespace proje_final
                 XamlRoot = this.XamlRoot
             }.ShowAsync();
         }
+
+
 
     }
 }

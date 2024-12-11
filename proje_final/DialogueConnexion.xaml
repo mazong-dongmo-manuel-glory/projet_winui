@@ -14,6 +14,7 @@
         <ComboBox x:Name="ComboBoxTypeUtilisateur" SelectionChanged="ComboBoxTypeUtilisateur_SelectionChanged">
             <ComboBoxItem Content="Administrateur" />
             <ComboBoxItem Content="Adhérent" />
+            <ComboBoxItem Content="Visiteur"></ComboBoxItem>
         </ComboBox>
 
         <!-- Champs pour administrateur -->

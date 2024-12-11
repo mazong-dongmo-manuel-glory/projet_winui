@@ -55,8 +55,10 @@ namespace proje_final
             this.categorie_nom = categorie_nom;
         }
 
-        public Visibility CanDisplay3 { get { return Singleton.getInstance().Admin != null ? Visibility.Collapsed : Visibility.Visible; } }
+        public Visibility CanDisplay3 { get { return Singleton.getInstance().adherent == null ? Visibility.Collapsed : Visibility.Visible; } }
         public Visibility CanDisplay { get { return Singleton.getInstance().Admin == null ? Visibility.Collapsed : Visibility.Visible; } }
+
+
 
         private void OnPropertyChanged(string propertyName)
         {

@@ -78,7 +78,7 @@ namespace proje_final
                         Note = reader.GetInt32("note")
                     };
 
-                    Debug.WriteLine($"Participation : idParticipation={participation.IdParticipation}, idSeance={participation.IdSeance}, note={participation.Note}");
+                
 
                     participationsListe.Add(participation);
                 }
@@ -104,10 +104,11 @@ namespace proje_final
                 cmd.Parameters.AddWithValue("@idSeance", participation.IdSeance);
                 cmd.Parameters.AddWithValue("@numeroAdherent", participation.NumeroAdherent);
                 cmd.Parameters.AddWithValue("@note", participation.Note);
-                cmd.ExecuteNonQuery();
-                con.Close();
 
+                cmd.ExecuteNonQuery();
                 participationsListe.Add(participation);
+
+                Debug.WriteLine($"Participation ajoutée : Seance={participation.IdSeance}, Adherent={participation.NumeroAdherent}");
                 return true;
             }
             catch (Exception ex)
@@ -115,7 +116,12 @@ namespace proje_final
                 Debug.WriteLine($"Erreur lors de l'ajout de la participation : {ex.Message}");
                 return false;
             }
+            finally
+            {
+                con.Close();
+            }
         }
+
 
 
         public bool ModifierNoteParticipation(int idParticipation, int nouvelleNote)
@@ -123,6 +129,7 @@ namespace proje_final
             openCon();
             try
             {
+                // Mise à jour dans la base de données
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "UPDATE participations SET note = @note WHERE idParticipation = @idParticipation";
                 cmd.Parameters.AddWithValue("@note", nouvelleNote);
@@ -130,6 +137,7 @@ namespace proje_final
                 cmd.ExecuteNonQuery();
                 con.Close();
 
+                // Mise à jour en mémoire
                 var participation = participationsListe.FirstOrDefault(p => p.IdParticipation == idParticipation);
                 if (participation != null)
                 {
@@ -142,6 +150,14 @@ namespace proje_final
             {
                 Debug.WriteLine($"Erreur lors de la mise à jour de la note : {ex.Message}");
                 return false;
+            }
+        }
+
+        public void DebugParticipations()
+        {
+            foreach (var participation in participationsListe)
+            {
+                Debug.WriteLine($"Participation ID: {participation.IdParticipation}, Note: {participation.Note}, Adhérent: {participation.NumeroAdherent}, Séance: {participation.IdSeance}");
             }
         }
 
@@ -611,17 +627,18 @@ namespace proje_final
             cmd.Parameters.AddWithValue("numero", numero);
             MySqlDataReader reader = cmd.ExecuteReader();
             if (reader.Read()) {
-                adherent = new Adherent
-                (
-                    reader.GetString("nom"),
-                    reader.GetString("prenom"),
-                    reader.GetString("numero"),
-                    reader["dateNaissance"].ToString(),
-                    reader.GetString("adresse")
-                );
+                adherent = new Adherent(
+                  reader.GetString("numero"), 
+                  reader.GetString("nom"),     
+                  reader.GetString("prenom"),
+                  reader["dateNaissance"].ToString(),
+                  reader.GetString("adresse")
+            );
                 etat = true;
                
             }
+            Debug.WriteLine($"Connexion Adherent : Numero={adherent.Numero}, Nom={adherent.Nom}");
+
             reader.Close();
             con.Close();
             return etat;
@@ -689,7 +706,7 @@ namespace proje_final
 
 
 
-       
+
         /// /////////////////////////////////////////////////// ///
 
 
@@ -701,17 +718,22 @@ namespace proje_final
         {
             var seancesFiltrees = new ObservableCollection<Seances>();
 
-            foreach (var seance in seancesListe)
+            foreach (var participation in participationsListe)
             {
-               
-                if (seance.IdAdherent == numeroAdherent)
+                if (participation.NumeroAdherent == numeroAdherent)
                 {
-                    seancesFiltrees.Add(seance);
+                    var seance = seancesListe.FirstOrDefault(s => s.Id == participation.IdSeance);
+                    if (seance != null)
+                    {
+                        seancesFiltrees.Add(seance);
+                    }
                 }
             }
 
+            Debug.WriteLine($"Séances pour l'adhérent {numeroAdherent} : {seancesFiltrees.Count}");
             return seancesFiltrees;
         }
+
 
 
         public ObservableCollection<Seances> GetSeancesDisponiblesPourActivite(int idActivite)
@@ -776,7 +798,7 @@ namespace proje_final
 
             foreach (var activite in activiteListe)
             {
-                Debug.WriteLine($"Traitement de l'activité : {activite.Nom} (ID : {activite.Id})");
+              
 
                 foreach (var participation in participationsListe)
                 {
@@ -784,7 +806,7 @@ namespace proje_final
 
                     if (seanceAssociee != null && seanceAssociee.IdActivite == activite.Id)
                     {
-                        Debug.WriteLine($"Participation liée : idParticipation={participation.IdParticipation}, idSeance={participation.IdSeance}, note={participation.Note}, Activité={activite.Nom}");
+                       
                     }
                 }
 
@@ -794,11 +816,11 @@ namespace proje_final
                         s.IdActivite == activite.Id))
                     .Select(p => p.Note);
 
-                Debug.WriteLine($"Notes trouvées pour {activite.Nom} : {string.Join(", ", notes)}");
+               
 
                 moyenneNotes[activite.Id] = notes.Any() ? notes.Average() : 0;
 
-                Debug.WriteLine($"Moyenne calculée pour {activite.Nom} : {moyenneNotes[activite.Id]}");
+           
             }
 
             return moyenneNotes;
@@ -809,6 +831,12 @@ namespace proje_final
             return participationsListe.Any(p => p.IdSeance == idSeance && p.NumeroAdherent == numeroAdherent);
         }
 
+        public bool CanRateActivity(int idSeance, string numeroAdherent)
+        {
+            return participationsListe.Any(p => p.IdSeance == idSeance && p.NumeroAdherent == numeroAdherent && p.Note == 0);
+        }
+
+     
 
 
     }

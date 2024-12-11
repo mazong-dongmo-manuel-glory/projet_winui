@@ -40,6 +40,10 @@ namespace proje_final
             {
                 PanelAdmin.Visibility = Visibility.Collapsed;
                 PanelAdherent.Visibility = Visibility.Visible;
+            } else if ( selection == "Visiteur")
+            {
+                
+                Singleton.mainFrame.Navigate(typeof(PageBlanche));
             }
         }
 
